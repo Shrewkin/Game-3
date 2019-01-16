@@ -19,6 +19,13 @@ namespace Behaviors
 {
 	class EnemyOne : public Component
 	{
-		EnemyOne()
+	public:
+
+		EnemyOne(float dist = 10.0f, float fireRate = 1.0f, float walkSpeed = 100.0f, float runSpeed = 200.0f);
+
+		Component* Clone() const;
+
+
+
 	};
 }

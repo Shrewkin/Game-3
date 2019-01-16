@@ -84,5 +84,8 @@
     <ClInclude Include="Source\Health.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EnemyOne.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

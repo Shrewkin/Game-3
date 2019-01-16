@@ -19,7 +19,7 @@ namespace Behaviors
 	class Health : public Component
 	{
 	public:
-		Health(int maxHealth);
+		Health(int maxHealth = 5);
 
 		Component* Clone() const;
 

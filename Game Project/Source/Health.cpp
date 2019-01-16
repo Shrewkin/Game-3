@@ -14,46 +14,49 @@
 #include "Health.h"
 #include "GameObject.h"
 
-
-Health::Health(int maxHealth)
-	: Component("Health"), maxHealth(maxHealth), currHealth(maxHealth)
+namespace Behaviors
 {
-}
 
-Component* Health::Clone() const
-{
-	return new Health(*this);
-}
-
-void Health::Add(int toAdd)
-{
-	currHealth += toAdd;
-	CheckCap();
-}
-
-void Health::Subtract(int toSubtract)
-{
-	currHealth -= toSubtract;
-	if (currHealth <= 0)
+	Health::Health(int maxHealth)
+		: Component("Health"), maxHealth(maxHealth), currHealth(maxHealth)
 	{
-		GetOwner()->Destroy();
 	}
-}
 
-int Health::GetHealth()
-{
-	return currHealth;
-}
-
-int Health::GetMaxHealth()
-{
-	return maxHealth;
-}
-
-void Health::CheckCap()
-{
-	if (currHealth > maxHealth)
+	Component* Health::Clone() const
 	{
-		currHealth = maxHealth;
+		return new Health(*this);
+	}
+
+	void Health::Add(int toAdd)
+	{
+		currHealth += toAdd;
+		CheckCap();
+	}
+
+	void Health::Subtract(int toSubtract)
+	{
+		currHealth -= toSubtract;
+		if (currHealth <= 0)
+		{
+			GetOwner()->Destroy();
+		}
+	}
+
+	int Health::GetHealth()
+	{
+		return currHealth;
+	}
+
+	int Health::GetMaxHealth()
+	{
+		return maxHealth;
+	}
+
+	void Health::CheckCap()
+	{
+		if (currHealth > maxHealth)
+		{
+			currHealth = maxHealth;
+		}
 	}
 }

@@ -14,25 +14,27 @@
 #include "Component.h"
 
 
-
-class Health : public Component
+namespace Behaviors
 {
-public:
-	Health(int maxHealth);
+	class Health : public Component
+	{
+	public:
+		Health(int maxHealth);
 
-	Component* Clone() const;
+		Component* Clone() const;
 
-	void Add(int toAdd);
-	void Subtract(int toSubtract);
+		void Add(int toAdd);
+		void Subtract(int toSubtract);
 
-	int GetHealth();
-	int GetMaxHealth();
+		int GetHealth();
+		int GetMaxHealth();
 
-private:
+	private:
 
-	void CheckCap();
+		void CheckCap();
 
-	int maxHealth;
-	int currHealth;
+		int maxHealth;
+		int currHealth;
 
-};
+	};
+}

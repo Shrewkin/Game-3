@@ -51,8 +51,8 @@ namespace Behaviors
 
 		Collider* collider = static_cast<Collider*>( GetOwner()->GetComponent("Collider") );
 
-		collider->SetMapCollisionHandler( MonkeyMapCollisionHandler );
-		collider->SetCollisionHandler( MonkeyCollisionHandler );
+		collider->SetMapCollisionHandler(MonkeyMapCollisionHandler);
+		collider->SetCollisionHandler(MonkeyCollisionHandler);
 	}
 
 	// Fixed update function for this component.

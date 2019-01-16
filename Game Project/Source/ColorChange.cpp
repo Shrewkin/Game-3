@@ -14,7 +14,6 @@ file level3.h.
 
 #include "stdafx.h"
 #include "ColorChange.h"
-
 #include "GameObject.h"
 #include "Sprite.h"
 #include "Collider.h"

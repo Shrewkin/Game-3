@@ -35,6 +35,7 @@ file Archetypes.h.
 #include "Physics.h"
 #include "Transform.h"
 #include "TileMap.h"
+#include "Health.h"
 
 
 //==================================================================-

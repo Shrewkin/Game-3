@@ -42,6 +42,20 @@ namespace Behaviors
 		return new Behaviors::ColorChange(*this);
 	}
 
+	// Collision handler for ColorChange objects.
+	// Params:
+	//   object = The first object.
+	//   other  = The other object the first object is colliding with.
+	void ColorChangeCollisionHandler(GameObject& object, GameObject& other)
+	{
+		UNREFERENCED_PARAMETER(other);
+
+		ColorChange* colorChange = static_cast<ColorChange*>(object.GetComponent("ColorChange"));
+
+		colorChange->collided = true;
+		colorChange->timer = colorChange->collidedColorTime;
+	}
+
 	// Initialize data for this object.
 	void ColorChange::Initialize()
 	{
@@ -67,19 +81,5 @@ namespace Behaviors
 		}
 
 		timer -= dt;
-	}
-
-	// Collision handler for ColorChange objects.
-	// Params:
-	//   object = The first object.
-	//   other  = The other object the first object is colliding with.
-	void ColorChangeCollisionHandler(GameObject& object, GameObject& other)
-	{
-		UNREFERENCED_PARAMETER(other);
-
-		ColorChange* colorChange = static_cast<ColorChange*>(object.GetComponent("ColorChange"));
-
-		colorChange->collided = true;
-		colorChange->timer = colorChange->collidedColorTime;
 	}
 }

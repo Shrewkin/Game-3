@@ -87,14 +87,14 @@
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64_D</TargetName>
-    <IncludePath>$(VC_IncludePath);include;..\LowLevelAPI\include;..\glfw\include;..\fmod\inc;$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(VC_IncludePath);include;..\LowLevelAPI\include;..\glfw\include;..\fmod\inc;fmod\inc;$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>..\LowLevelAPI\lib;..\glfw\lib\x64;..\fmod\lib;</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64</TargetName>
-    <IncludePath>$(VC_IncludePath);include;..\LowLevelAPI\include;..\glfw\include;..\fmod\inc;$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(VC_IncludePath);include;..\LowLevelAPI\include;..\glfw\include;..\fmod\inc;fmod\inc;$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>..\LowLevelAPI\lib;..\glfw\lib\x64;..\fmod\lib;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

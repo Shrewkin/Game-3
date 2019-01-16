@@ -43,6 +43,50 @@ namespace Behaviors
 		return new MonkeyMovement(*this);
 	}
 
+	// Map collision handler for Monkey objects.
+	// Params:
+	//   object = The monkey object.
+	//   collision = Which sides the monkey collided on.
+	void MonkeyMapCollisionHandler(GameObject& object,
+		const MapCollision& collision)
+	{
+		if (collision.bottom)
+		{
+			static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
+		}
+	}
+
+	// Collision handler for monkey.
+	// Params:
+	//   object = The monkey.
+	//   other  = The object the monkey is colliding with.
+	void MonkeyCollisionHandler(GameObject& object, GameObject& other)
+	{
+		//if the object is named collectable, destroy it
+		if (other.GetName()._Equal("Collectable"))
+		{
+			other.Destroy();
+
+			//check if THIS collectable is the last one
+			if (object.GetSpace()->GetObjectManager().GetObjectCount("Collectable") <= 1)
+			{
+				object.GetSpace()->RestartLevel();
+			}
+		}
+
+		//if the object is named hazard, kill the player
+		if (other.GetName()._Equal("Hazard"))
+		{
+			object.GetSpace()->RestartLevel();
+		}
+
+		//if the object is named enemy, kill the player
+		if (other.GetName()._Equal("Enemy"))
+		{
+			object.GetSpace()->RestartLevel();
+		}
+	}
+
 	// Initialize this component (happens at object creation).
 	void MonkeyMovement::Initialize()
 	{
@@ -68,50 +112,6 @@ namespace Behaviors
 
 		Camera& camera = graphics.GetCurrentCamera();
 		camera.SetTranslation(transform->GetTranslation());
-	}
-
-	// Map collision handler for Monkey objects.
-	// Params:
-	//   object = The monkey object.
-	//   collision = Which sides the monkey collided on.
-	void MonkeyMapCollisionHandler(GameObject& object,
-		const MapCollision& collision)
-	{
-		if (collision.bottom)
-		{
-			static_cast<MonkeyMovement*>(object.GetComponent("MonkeyMovement"))->onGround = true;
-		}
-	}
-
-	// Collision handler for monkey.
-	// Params:
-	//   object = The monkey.
-	//   other  = The object the monkey is colliding with.
-	void MonkeyCollisionHandler(GameObject& object, GameObject& other)
-	{
-		//if the object is named collectable, destroy it
-		if (other.GetName()._Equal("Collectable") )
-		{
-			other.Destroy();
-
-			//check if THIS collectable is the last one
-			if (object.GetSpace()->GetObjectManager().GetObjectCount("Collectable") <= 1)
-			{
-				object.GetSpace()->RestartLevel();
-			}
-		}
-
-		//if the object is named hazard, kill the player
-		if (other.GetName()._Equal("Hazard"))
-		{
-			object.GetSpace()->RestartLevel();
-		}
-
-		//if the object is named enemy, kill the player
-		if (other.GetName()._Equal("Enemy"))
-		{
-			object.GetSpace()->RestartLevel();
-		}
 	}
 
 	//==================================================================-

@@ -89,6 +89,12 @@ namespace Archetypes
 	// Returns:
 	//   A pointer to the newly constructed game object.
 	GameObject* CreateTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
+
+	// Create a game object archetype that uses the Asteroid texture.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreatePlayer(Mesh* mesh, SpriteSource* spriteSource);
+	
 }
 
 //----------------------------------------------------------------------------

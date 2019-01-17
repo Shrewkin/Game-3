@@ -107,11 +107,6 @@ namespace Behaviors
 		UNREFERENCED_PARAMETER(dt);
 		MoveHorizontal();
 		MoveVertical();
-
-		Graphics& graphics = Graphics::GetInstance();
-
-		Camera& camera = graphics.GetCurrentCamera();
-		camera.SetTranslation(transform->GetTranslation());
 	}
 
 	//==================================================================-
@@ -139,22 +134,17 @@ namespace Behaviors
 	// Moves vertically based on input
 	void MonkeyMovement::MoveVertical() 
 	{
-		if (physics->GetVelocity().y < -1.0f)
+		Vector2D move = physics->GetVelocity();
+		move.y = 0.0f;
+		if (Input::GetInstance().CheckHeld(VK_UP))
 		{
-			onGround = false;
+			move.y += monkeyWalkSpeed;
+		}
+		else if (Input::GetInstance().CheckHeld(VK_DOWN))
+		{
+			move.y -= monkeyWalkSpeed;
 		}
 
-		if (onGround)
-		{
-			if (Input::GetInstance().CheckHeld(VK_UP))
-			{
-				Vector2D move = physics->GetVelocity();
-				move.y = monkeyJumpSpeed;
-				physics->SetVelocity(move);
-				onGround = false;
-			}
-		}
-
-		physics->AddForce(gravity);
+		physics->SetVelocity(move);
 	}
 }

@@ -23,6 +23,7 @@ file Archetypes.h.
 #include "ColliderRectangle.h"
 #include "ColliderTilemap.h"
 #include "MonkeyMovement.h"
+#include "PlayerMovement.h"
 #include "Colorchange.h"
 #include "Space.h"
 #include <Input.h>
@@ -237,8 +238,8 @@ GameObject* Archetypes::CreateRectangle(Mesh* mesh)
 GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteSource, Tilemap * map)
 {
 	//initilize all components
-	Transform* transform = new Transform(-350.0f, 250.0f);
-	transform->SetScale(Vector2D(100.0f, 100.0f));
+	Transform* transform = new Transform(-366.5f, 281.0f);
+	transform->SetScale(Vector2D(50.0f, 50.0f));
 
 	SpriteTilemap* spriteMap = new SpriteTilemap();
 	spriteMap->SetMesh(mesh);
@@ -255,6 +256,37 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 	tileMap->AddComponent(colliderTilemap);
 
 	return tileMap;
+}
+
+// Create a game object archetype that uses the Asteroid texture.
+// Returns:
+//	 A pointer to the newly constructed game object
+GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
+{
+	//initilize all components
+	Transform* transform = new Transform(0.0f, 0.0f);
+	transform->SetScale(Vector2D(50.0f, 50.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+
+	Physics* physics = new Physics();
+	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
+
+	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
+
+	//create object add all the components
+	GameObject* monkeyObject = new GameObject("Player");
+	monkeyObject->AddComponent(transform);
+	monkeyObject->AddComponent(physics);
+	monkeyObject->AddComponent(sprite);
+	monkeyObject->AddComponent(playerMovement);
+	monkeyObject->AddComponent(colliderRectangle);
+
+	//GameObjectFactory::GetInstance().SaveObjectToFile(asteroidObject);
+
+	return monkeyObject;
 }
 
 /*

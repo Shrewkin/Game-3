@@ -1,7 +1,4 @@
-﻿  ColorChange.cpp
-  MonkeyMovement.cpp
-  Generating Code...
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  PlayerMovement.cpp
   CS230Lab8.vcxproj -> C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\\x64\Debug\BetaFramework.exe
   glfw\lib\x64\glfw3.dll
   1 File(s) copied

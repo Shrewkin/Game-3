@@ -57,6 +57,10 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
+		void SetEnemyBool(bool val);
+
+		bool GetEnemyBool() const;
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -64,6 +68,8 @@ namespace Behaviors
 
 		// Amount of time until the object self-destructs.
 		float timeUntilDeath;
+
+		bool enemy;
 	};
 }
 

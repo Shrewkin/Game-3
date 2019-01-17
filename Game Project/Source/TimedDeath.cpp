@@ -28,7 +28,7 @@ namespace Behaviors
 	// Params:
 	//   timeUntilDeath = Amount of time until the object self-destructs.
 	TimedDeath::TimedDeath(float timeUntilDeath)
-		: Component("TimedDeath"), timeUntilDeath(timeUntilDeath)
+		: Component("TimedDeath"), timeUntilDeath(timeUntilDeath), enemy(false)
 	{
 	}
 
@@ -51,5 +51,15 @@ namespace Behaviors
 		{
 			GetOwner()->Destroy();
 		}
+	}
+
+	void TimedDeath::SetEnemyBool(bool val)
+	{
+		enemy = val;
+	}
+
+	bool TimedDeath::GetEnemyBool() const
+	{
+		return enemy;
 	}
 }

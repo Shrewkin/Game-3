@@ -89,6 +89,8 @@ namespace Archetypes
 	// Returns:
 	//   A pointer to the newly constructed game object.
 	GameObject* CreateTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
+
+	GameObject* CreateEnemyObject(Mesh* mesh/*, SpriteSource * spriteSource*/);
 }
 
 //----------------------------------------------------------------------------

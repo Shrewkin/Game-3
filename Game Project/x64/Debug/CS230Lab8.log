@@ -1,6 +1,8 @@
-﻿  ColorChange.cpp
-C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\Source\ColorChange.cpp(50): error C2065: 'ColorChangeCollisionHandler': undeclared identifier
-  MonkeyMovement.cpp
-C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\Source\MonkeyMovement.cpp(54): error C2065: 'MonkeyMapCollisionHandler': undeclared identifier
-C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\Source\MonkeyMovement.cpp(55): error C2065: 'MonkeyCollisionHandler': undeclared identifier
-  Generating Code...
+﻿  CS230Lab8.vcxproj -> C:\Users\jakob.mcfarland\Documents\GitHub\Game-3\Game Project\\x64\Debug\BetaFramework.exe
+  CS230Lab8.vcxproj -> C:\Users\jakob.mcfarland\Documents\GitHub\Game-3\Game Project\\x64\Debug\BetaFramework.pdb (Partial PDB)
+  glfw\lib\x64\glfw3.dll
+  1 File(s) copied
+  fmod\lib\fmodL64.dll
+  1 File(s) copied
+  fmod\lib\fmodstudioL64.dll
+  1 File(s) copied

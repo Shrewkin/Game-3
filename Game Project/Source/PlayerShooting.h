@@ -1,7 +1,7 @@
 /*
 /file   PlayerShooting.h
 /author Jakob McFarland
-/date   1/15/2019
+/date   1/16/2019
 /brief
 
 This is the specification file for all member functions
@@ -27,8 +27,7 @@ of the class PlayerShooting.
 //------------------------------------------------------------------------------
 
 class Transform;
-class Physics;
-struct MapCollision;
+class ColliderTilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -45,7 +44,7 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Constructor
-		PlayerShooting();
+		PlayerShooting(float maxheat_ = 5.0f, int beamLength = 10);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -65,11 +64,15 @@ namespace Behaviors
 		// Private Functions:
 		//------------------------------------------------------------------------------
 
-		// Moves horizontally based on input
-		void GetAim();
+		// Finds the player's aim vector based on the mouse current position
+		// Returns:
+		//	a normalized vector to the player's mouse
+		Vector2D GetAim();
 
-		// Moves vertically based on input
-		void Shoot();
+		// Shoots a laser beam based on the player's aim vector
+		// Params:
+		//	aim = Vector2D that holds the player's aim vector
+		void Shoot(Vector2D aim);
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -78,9 +81,12 @@ namespace Behaviors
 		// properties
 		float overHeating;
 		float maxHeat;
+		int rayCastLength;
+
+		//ray
+		ColliderTilemap* worldMap;
 
 		// Components
 		Transform* transform;
-		Physics* physics;
 	};
 }

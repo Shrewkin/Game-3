@@ -27,6 +27,7 @@ of the class PlayerShooting.
 //------------------------------------------------------------------------------
 
 class Transform;
+class Sprite;
 class ColliderTilemap;
 
 //------------------------------------------------------------------------------
@@ -44,7 +45,7 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Constructor
-		PlayerShooting(float maxheat_ = 5.0f, int beamLength = 10);
+		PlayerShooting(GameObject* laserBeamObj_, float maxheat_ = 5.0f, int beamLength = 10);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -85,6 +86,10 @@ namespace Behaviors
 
 		//ray
 		ColliderTilemap* worldMap;
+
+		GameObject* laserBeamObject;
+		Transform* laserBeamTransform;
+		Sprite* laserBeamSprite;
 
 		// Components
 		Transform* transform;

@@ -16,6 +16,7 @@ of the class PlayerShooting.
 #include <Graphics.h>
 #include <Transform.h>
 #include <GameObject.h>
+#include <Sprite.h>
 #include <Space.h>
 #include <ColliderTilemap.h>
 #include <ColliderRectangle.h>
@@ -31,11 +32,10 @@ namespace Behaviors
 	// Params:
 	//	mHeat = float, Maximum over heating that the laser can take
 	//	beamLenth
-	PlayerShooting::PlayerShooting(float maxHeat_, int beamLength)
-		: Component("PlayerShooting"), overHeating(0.0f), maxHeat(maxHeat_),
-		rayCastLength(beamLength)
+	PlayerShooting::PlayerShooting(GameObject* laserBeamObj_, float maxHeat_, int beamLength)
+		: Component("PlayerShooting"), laserBeamObject(laserBeamObj_ ), overHeating(0.0f),
+		maxHeat(maxHeat_), rayCastLength(beamLength)
 	{
-
 	}
 
 	// Clone a component and return a pointer to the cloned component.
@@ -50,6 +50,9 @@ namespace Behaviors
 	void PlayerShooting::Initialize()
 	{
 		overHeating = 0.0f;
+
+		laserBeamTransform =  static_cast<Transform*>( laserBeamObject->GetComponent("Transform") );
+		laserBeamSprite = static_cast<Sprite*>(laserBeamObject->GetComponent("Sprite"));
 	}
 
 	// Update function for this component.
@@ -74,6 +77,8 @@ namespace Behaviors
 			//update cooldown with delta time
 			overHeating -= dt;
 		}
+
+		//laserBeamSprite->SetColor( );
 	}
 
 	//------------------------------------------------------------------------------

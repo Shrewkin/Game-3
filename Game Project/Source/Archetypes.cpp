@@ -36,6 +36,9 @@ file Archetypes.h.
 #include "Physics.h"
 #include "Transform.h"
 #include "TileMap.h"
+#include "EnemyOne.h"
+#include "EnemySpawner.h"
+#include "Health.h"
 
 
 //==================================================================-
@@ -85,11 +88,14 @@ GameObject* Archetypes::CreateBulletArchetype(Mesh* mesh)
 	Physics* physics = new Physics();
 	Behaviors::TimedDeath* timedDeath = new Behaviors::TimedDeath(5.0f);
 
+	ColliderCircle* colliderCircle = new ColliderCircle(transform->GetScale().x * 0.5f);
+
 	//create object add all the components
 	GameObject* bullet = new GameObject("Bullet");
 	bullet->AddComponent(transform);
 	bullet->AddComponent(physics);
 	bullet->AddComponent(sprite);
+	bullet->AddComponent(colliderCircle);
 	bullet->AddComponent(timedDeath);
 
 	//GameObjectFactory::GetInstance().SaveObjectToFile(bullet);
@@ -285,6 +291,55 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 	//GameObjectFactory::GetInstance().SaveObjectToFile(asteroidObject);
 
 	return playerObject;
+}
+
+GameObject* Archetypes::CreateEnemySpawner()
+{
+	GameObject* spawner = new GameObject("Spawner");
+
+	Behaviors::EnemySpawner* enemySpawner = new Behaviors::EnemySpawner();
+
+	spawner->AddComponent(enemySpawner);
+
+	return spawner;
+}
+
+// Create an enemy object
+// Params:
+//   mesh = The mesh to use for the sprite.
+//   spriteSource = The sprite source to use for the sprite.
+// Returns:
+//   A pointer to the newly constructed game object.
+GameObject* Archetypes::CreateEnemyObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/)
+{
+	//initilize all components
+	Transform* transform = new Transform(spawnPos.x, spawnPos.y);
+	transform->SetScale(Vector2D(50.0f, 50.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	//sprite->SetSpriteSource(spriteSource);
+	sprite->SetColor(Colors::Red);
+
+	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
+
+	Physics* physics = new Physics();
+
+	Behaviors::Health* health = new Behaviors::Health(5);
+
+	Behaviors::EnemyOne* enemy = new Behaviors::EnemyOne(1.0f, 100.0f, 150.0f, 250.0f, 300.0f);
+
+	//create object add all the components
+	GameObject* enemyObject = new GameObject("Enemy");
+
+	enemyObject->AddComponent(transform);
+	enemyObject->AddComponent(sprite);
+	enemyObject->AddComponent(colliderRectangle);
+	enemyObject->AddComponent(physics);
+	enemyObject->AddComponent(health);
+	enemyObject->AddComponent(enemy);
+
+	return enemyObject;
 }
 
 /*

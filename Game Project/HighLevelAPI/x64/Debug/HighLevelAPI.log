@@ -1,1 +1,29 @@
-﻿  HighLevelAPI.vcxproj -> C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\HighLevelAPI\\lib\BetaHigh_x64_D.lib
+﻿  Animation.cpp
+  Collider.cpp
+  ColliderCircle.cpp
+  ColliderPoint.cpp
+  ColliderRectangle.cpp
+  ColliderTilemap.cpp
+  Component.cpp
+  GameObject.cpp
+  GameObjectManager.cpp
+  Intersection2D.cpp
+  Matrix2Dstudent.cpp
+  MeshHelper.cpp
+  Physics.cpp
+  SoundManager.cpp
+  Space.cpp
+  Sprite.cpp
+  SpriteSource.cpp
+  SpriteTilemap.cpp
+  Tilemap.cpp
+  Transform.cpp
+  Generating Code...
+  Compiling...
+  level.cpp
+  Generating Code...
+fmodL64_vc.lib(fmodL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored
+fmodL64_vc.lib(fmodL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64_D.lib(RPCRT4.dll); second definition ignored
+fmodstudioL64_vc.lib(fmodstudioL64.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  HighLevelAPI.vcxproj -> C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\HighLevelAPI\\lib\BetaHigh_x64_D.lib

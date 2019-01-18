@@ -15,6 +15,8 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
+#include <Vector2D.h>
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -94,6 +96,10 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreatePlayer(Mesh* mesh, SpriteSource* spriteSource);
+	
+	GameObject* CreateEnemySpawner();
+
+	GameObject* CreateEnemyObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
 	
 }
 

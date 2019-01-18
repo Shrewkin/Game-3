@@ -68,6 +68,8 @@ namespace Levels
 		std::cout << "Level1::Initialize" << std::endl;
 
 		GetSpace()->GetObjectManager().AddObject( *Archetypes::CreateShip(meshShip) );
+		//GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemyObject(meshShip, Vector2D(100.0f, 200.0f)));
+		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemySpawner());
 
 		musicChannel = soundManager->PlaySound("Asteroid Field");
 	}
@@ -82,6 +84,7 @@ namespace Levels
 		//std::cout << "Level1::Update" << std::endl;
 
 		sprintf_s(windowTitle, titleStringLength, "Bullets: %d", GetSpace()->GetObjectManager().GetObjectCount("Bullet"));
+		//std::cout << GetSpace()->GetObjectManager().GetObjectCount("Spawner") << std::endl;
 		System::GetInstance().SetWindowTitle(windowTitle);
 
 		if (Input::GetInstance().CheckTriggered('1') )

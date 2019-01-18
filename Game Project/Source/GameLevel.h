@@ -73,6 +73,9 @@ namespace Levels
 		Texture* texturePlayer;
 		SpriteSource* spriteSourcePlayer;
 
+		// Bullet
+		Mesh* meshBullet;
+
 		unsigned columnsPlayer;
 		unsigned rowsPlayer;
 

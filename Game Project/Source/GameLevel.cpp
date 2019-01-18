@@ -24,6 +24,8 @@
 #include "SpriteSource.h"
 #include "MeshHelper.h"
 #include "Texture.h"
+#include "EnemyOne.h"
+#include "EnemySpawner.h"
 #include <Graphics.h>
 #include <Engine.h>
 
@@ -52,6 +54,9 @@ namespace Levels
 	void GameLevel::Load()
 	{
 		std::cout << "Level2::Load" << std::endl;
+
+		meshBullet = CreateTriangleMesh(Colors::Red, Colors::Red, Colors::Red);
+		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateBulletArchetype(meshBullet));
 
 		texturePlayer = Texture::CreateTextureFromFile("Player.png");
 		spriteSourcePlayer = new SpriteSource(columnsPlayer, rowsPlayer, texturePlayer);
@@ -82,7 +87,7 @@ namespace Levels
 
 		Graphics& graphics = Graphics::GetInstance();
 		graphics.SetBackgroundColor(Colors::Grey);
-
+		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemySpawner());
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer));
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap));
 	}
@@ -112,6 +117,7 @@ namespace Levels
 		delete texturePlayer;
 		delete spriteSourcePlayer;
 
+		delete meshBullet;
 		delete dataMap;
 		delete meshMap;
 		delete textureMap;

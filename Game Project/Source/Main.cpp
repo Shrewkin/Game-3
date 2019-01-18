@@ -24,6 +24,7 @@
 
 // Initial game state
 #include "GameLevel.h"
+#include "Level1.h"
 
 //------------------------------------------------------------------------------
 

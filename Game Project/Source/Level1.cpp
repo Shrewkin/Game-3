@@ -68,7 +68,8 @@ namespace Levels
 		std::cout << "Level1::Initialize" << std::endl;
 
 		GetSpace()->GetObjectManager().AddObject( *Archetypes::CreateShip(meshShip) );
-		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemyObject(meshShip));
+		//GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemyObject(meshShip, Vector2D(100.0f, 200.0f)));
+		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemySpawner());
 
 		musicChannel = soundManager->PlaySound("Asteroid Field");
 	}

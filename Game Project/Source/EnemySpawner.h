@@ -16,6 +16,7 @@
 #include "Component.h"
 
 class Transform;
+class Mesh;
 
 namespace Behaviors
 {
@@ -25,6 +26,8 @@ namespace Behaviors
 
 		EnemySpawner();
 
+		~EnemySpawner();
+
 		Component* Clone() const;
 
 		void Initialize() override;
@@ -33,10 +36,32 @@ namespace Behaviors
 
 	private:
 
-		void SpawnWave(int wave);
+		void SpawnWave();
+		void SpawnEnemy();
 
+		//Spawn stuff
 		Vector2D spawnPos;
-		int baseSpawnCount;
+		unsigned baseSpawnCount;
+		float randSpawnOffset;
+		float spawnTimer;
+		unsigned spawnChance; //I couldn't think of another name for this, but it's used to choose enemy types based on the wave
+						//(used when we add more enemies)
+		unsigned toSpawn;
+
+		//Enemy Archetypes
+		GameObject* enemy1;
+
+		//Wave stuff
+		int currWave;
+		int waveCountModifier;
+		float waveTimer;
+
+		//Timer stuff
+		float timer1; //spawnTimer
+		float timer2; //waveTimer
+
+		//Enemy meshes
+		Mesh* enemy1Mesh;
 
 
 	};

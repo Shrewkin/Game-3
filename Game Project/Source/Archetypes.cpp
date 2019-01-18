@@ -37,6 +37,7 @@ file Archetypes.h.
 #include "TileMap.h"
 #include "Health.h"
 #include "EnemyOne.h"
+#include "EnemySpawner.h"
 
 
 //==================================================================-
@@ -324,16 +325,27 @@ GameObject * Archetypes::CreateHazardObject(Mesh * mesh, SpriteSource * spriteSo
 */
 
 
+GameObject* Archetypes::CreateEnemySpawner()
+{
+	GameObject* spawner = new GameObject("Spawner");
+
+	Behaviors::EnemySpawner* enemySpawner = new Behaviors::EnemySpawner();
+
+	spawner->AddComponent(enemySpawner);
+
+	return spawner;
+}
+
 // Create an enemy object
 // Params:
 //   mesh = The mesh to use for the sprite.
 //   spriteSource = The sprite source to use for the sprite.
 // Returns:
 //   A pointer to the newly constructed game object.
-GameObject* Archetypes::CreateEnemyObject(Mesh * mesh/*, SpriteSource * spriteSource*/)
+GameObject* Archetypes::CreateEnemyObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/)
 {
 	//initilize all components
-	Transform* transform = new Transform(100.0f, 200.0f);
+	Transform* transform = new Transform(spawnPos.x, spawnPos.y);
 	transform->SetScale(Vector2D(50.0f, 50.0f));
 
 	Sprite* sprite = new Sprite();

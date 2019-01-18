@@ -41,7 +41,7 @@ namespace Archetypes
 	//   mesh  = The mesh to use for the object's sprite.
 	// Returns:
 	//	 A pointer to the newly constructed game object
-	GameObject* CreateShip(Mesh* mesh);
+	GameObject* CreateShip(Mesh* mesh, GameObject* obj);
 
 	// Create the archetype for the bullet object.
 	// Params:
@@ -89,6 +89,15 @@ namespace Archetypes
 	// Returns:
 	//   A pointer to the newly constructed game object.
 	GameObject* CreateTilemapObject(Mesh* mesh, SpriteSource* spriteSource, Tilemap* map);
+
+	// Create the laser beams object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//	 spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateLaserBeamObject(Mesh* mesh);
+
 }
 
 //----------------------------------------------------------------------------

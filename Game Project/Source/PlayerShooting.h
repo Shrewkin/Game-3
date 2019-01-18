@@ -19,6 +19,7 @@ of the class PlayerShooting.
 
 #include "Vector2D.h" // Vector2D
 
+#include <Color.h> // Color
 
 //------------------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ of the class PlayerShooting.
 
 class Transform;
 class Sprite;
+class Color;
 class ColliderTilemap;
 
 //------------------------------------------------------------------------------
@@ -45,7 +47,8 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Constructor
-		PlayerShooting(GameObject* laserBeamObj_, float maxheat_ = 5.0f, int beamLength = 10);
+		PlayerShooting(GameObject* laserBeamObj_, ColliderTilemap* worldMap_ = nullptr, float maxheat_ = 5.0f,
+			int beamLength_ = 10, float beamWidth_ = 25.0f);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -73,7 +76,7 @@ namespace Behaviors
 		// Shoots a laser beam based on the player's aim vector
 		// Params:
 		//	aim = Vector2D that holds the player's aim vector
-		void Shoot(Vector2D aim);
+		void Shoot(Vector2D aim, Vector2D result);
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -83,9 +86,14 @@ namespace Behaviors
 		float overHeating;
 		float maxHeat;
 		int rayCastLength;
+		float beamWidth;
 
 		//ray
 		ColliderTilemap* worldMap;
+
+		// beam
+		Color coolColor;
+		Color hotColor;
 
 		GameObject* laserBeamObject;
 		Transform* laserBeamTransform;

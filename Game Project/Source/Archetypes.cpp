@@ -36,6 +36,8 @@ file Archetypes.h.
 #include "Transform.h"
 #include "TileMap.h"
 
+#include "PlayerShooting.h"
+
 
 //==================================================================-
 // Public Functions:
@@ -44,7 +46,7 @@ file Archetypes.h.
 // Create a game object that uses the Ship texture.
 // Returns:
 //	 A pointer to the newly constructed game object
-GameObject* Archetypes::CreateShip(Mesh* mesh)
+GameObject* Archetypes::CreateShip(Mesh* mesh, GameObject* obj)
 {
 	//initilize all components
 	Transform* transform = new Transform(0.0f, 0.0f);
@@ -53,6 +55,9 @@ GameObject* Archetypes::CreateShip(Mesh* mesh)
 	Sprite* sprite = new Sprite();
 	sprite->SetMesh(mesh);
 	sprite->SetColor(Colors::LightBlue);
+
+	Behaviors::PlayerShooting* playerShooting = new Behaviors::PlayerShooting(obj);
+
 
 	Physics* physics = new Physics();
 	Behaviors::PlayerShip* playerShip = new Behaviors::PlayerShip(100.0f, 200.f, 5.0f, 100.0f);
@@ -63,6 +68,8 @@ GameObject* Archetypes::CreateShip(Mesh* mesh)
 	playerShipObject->AddComponent(physics);
 	playerShipObject->AddComponent(sprite);
 	playerShipObject->AddComponent(playerShip);
+
+	playerShipObject->AddComponent(playerShooting);
 
 	//GameObjectFactory::GetInstance().SaveObjectToFile(playerShipObject);
 
@@ -353,5 +360,30 @@ GameObject * Archetypes::CreateEnemyObject(Mesh * mesh, SpriteSource * spriteSou
 	return enemyObject;
 }
 */
+
+// Create the laser beams object.
+// Params:
+//   mesh  = The mesh to use for the object's sprite.
+//	 spriteSource = The sprite source to use for the object.
+// Returns:
+//	 A pointer to the newly constructed game object
+GameObject* Archetypes::CreateLaserBeamObject(Mesh * mesh)
+{
+	//initilize all components
+	Transform* transform = new Transform(0.0f, 0.0f);
+	transform->SetScale(Vector2D(20.0f, 20.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+
+	//create object add all the components
+	GameObject* laser = new GameObject("LaserBeam");
+	laser->AddComponent(transform);
+	laser->AddComponent(sprite);
+
+	//GameObjectFactory::GetInstance().SaveObjectToFile(bullet);
+
+	return laser;
+}
 
 //==================================================================-

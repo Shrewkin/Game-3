@@ -195,7 +195,7 @@ void GameObjectManager::FixedUpdate(float dt)
 void GameObjectManager::DestroyObjects()
 {
 	//foreach game object
-	for (unsigned i = 0; i < numObjects; ++i)
+	for (unsigned i = 0; i < numObjects; )
 	{
 		//check if destroyed
 		if (gameObjectActiveList[i]->IsDestroyed())
@@ -209,6 +209,10 @@ void GameObjectManager::DestroyObjects()
 			//numObjects is now the last index, set i to last index 
 			gameObjectActiveList[i] = gameObjectActiveList[numObjects];
 			gameObjectActiveList[numObjects] = nullptr;		
+		}
+		else
+		{
+			++i;
 		}
 	}
 }

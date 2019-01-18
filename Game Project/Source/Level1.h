@@ -28,8 +28,8 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class GameObject;
 class Mesh;
+class SpriteSource;
 class SoundManager;
 
 //------------------------------------------------------------------------------
@@ -74,6 +74,7 @@ namespace Levels
 		// Meshes
 		Mesh* meshShip;
 		Mesh* meshBullet;
+		Mesh* meshLaser;
 
 		// Title
 		static const unsigned titleStringLength = 20;

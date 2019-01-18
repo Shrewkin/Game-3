@@ -24,13 +24,16 @@ file Level1.h.
 #include "MeshHelper.h"
 #include "Transform.h"
 #include "Color.h"
+#include <SpriteSource.h>
+#include <Texture.h>
 #include "Sprite.h"
-#include "Mesh.h"
+#include <Mesh.h>
 #include "Space.h"
 #include <Engine.h>
 #include <Input.h>
 #include <System.h>
 #include "SoundManager.h"
+#include <GameObject.h>
 
 namespace Levels
 {
@@ -51,8 +54,11 @@ namespace Levels
 
 		meshShip = CreateTriangleMesh(Colors::Green, Colors::Green, Colors::Green);
 		meshBullet = CreateTriangleMesh(Colors::Red, Colors::Red, Colors::Red);
+		
+		meshLaser = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
 
-		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateBulletArchetype(meshBullet));
+
+		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateBulletArchetype(meshLaser));
 
 		soundManager = Engine::GetInstance().GetModule<SoundManager>();
 		soundManager->AddMusic("Asteroid_Field.mp3");
@@ -67,7 +73,10 @@ namespace Levels
 	{
 		std::cout << "Level1::Initialize" << std::endl;
 
-		GetSpace()->GetObjectManager().AddObject( *Archetypes::CreateShip(meshShip) );
+		GameObject* laser = Archetypes::CreateLaserBeamObject(meshLaser);
+		GetSpace()->GetObjectManager().AddObject(*laser);
+
+		GetSpace()->GetObjectManager().AddObject( *Archetypes::CreateShip(meshShip, laser) );
 
 		musicChannel = soundManager->PlaySound("Asteroid Field");
 	}
@@ -116,6 +125,7 @@ namespace Levels
 
 		delete meshShip;
 		delete meshBullet;
+		delete meshLaser;
 
 		soundManager->Shutdown();
 	}

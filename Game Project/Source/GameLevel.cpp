@@ -24,6 +24,7 @@
 #include "SpriteSource.h"
 #include "MeshHelper.h"
 #include "Texture.h"
+#include <Graphics.h>
 #include <Engine.h>
 
 namespace Levels
@@ -39,6 +40,11 @@ namespace Levels
 		, rowsPlayer(1)
 		, columnsMap(4)
 		, rowsMap(3)
+		, timer(0)
+		, score(0)
+		// When weapons are implemented and we merge the branches, multiply a modifier by the amount currently being dealt
+		, currentDamage(100)
+		, damageDealt(0)
 	{
 	}
 
@@ -50,7 +56,7 @@ namespace Levels
 		texturePlayer = Texture::CreateTextureFromFile("Player.png");
 		spriteSourcePlayer = new SpriteSource(columnsPlayer, rowsPlayer, texturePlayer);
 
-		meshPlayer = CreateQuadMesh(Vector2D(0.33333f, 0.2f), Vector2D(0.5, 0.5));
+		meshPlayer = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5, 0.5));
 
 		Tilemap* tilemapBuffer = Tilemap::CreateTilemapFromFile("Assets/Levels/GameMap.txt");
 
@@ -74,7 +80,8 @@ namespace Levels
 	{
 		std::cout << "Level2::Initialize" << std::endl;
 
-
+		Graphics& graphics = Graphics::GetInstance();
+		graphics.SetBackgroundColor(Colors::Grey);
 
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer));
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap));
@@ -87,7 +94,13 @@ namespace Levels
 	{
 		UNREFERENCED_PARAMETER(dt);
 
+		// The following is made for gameplay testing purposes (can be considered cheat COdes)
+		//if (Input::GetInstance().CheckTriggered('1'))
+		//{
+		//
+		//}
 
+		GameManager(dt);
 	}
 
 	// Unload the resources associated with Level 2.
@@ -103,5 +116,11 @@ namespace Levels
 		delete meshMap;
 		delete textureMap;
 		delete spriteSourceMap;
+	}
+
+	// Updates Game Variables
+	void GameLevel::GameManager(float dt)
+	{
+		timer += dt;
 	}
 }

@@ -60,6 +60,8 @@ namespace Levels
 		// Unload the resources associated with Level 2.
 		void Unload() override;
 
+		void GameManager(float dt);
+
 	private:
 
 		//------------------------------------------------------------------------------
@@ -82,6 +84,14 @@ namespace Levels
 
 		unsigned columnsMap;
 		unsigned rowsMap;
+
+		// Game Manager Data
+		float timer;
+		int score;
+		// Amount of damage that the weapon currently deals to each enemy it comes in contact with.
+		// Current Damage will change with the more upgrades that the player has.
+		int currentDamage;
+		int damageDealt;
 	};
 }
 

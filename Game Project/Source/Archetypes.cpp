@@ -258,35 +258,33 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 	return tileMap;
 }
 
-// Create a game object archetype that uses the Asteroid texture.
+// Create a game object archetype that uses the Player texture.
 // Returns:
 //	 A pointer to the newly constructed game object
 GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 {
-	//initilize all components
+	// Create object and initilize all components
+	GameObject* playerObject = new GameObject("Player");
 	Transform* transform = new Transform(0.0f, 0.0f);
-	transform->SetScale(Vector2D(50.0f, 50.0f));
-
+	Physics* physics = new Physics();
 	Sprite* sprite = new Sprite();
+	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
+	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
+
+	transform->SetScale(Vector2D(50.0f, 50.0f));
 	sprite->SetMesh(mesh);
 	sprite->SetSpriteSource(spriteSource);
 
-	Physics* physics = new Physics();
-	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
-
-	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
-
-	//create object add all the components
-	GameObject* monkeyObject = new GameObject("Player");
-	monkeyObject->AddComponent(transform);
-	monkeyObject->AddComponent(physics);
-	monkeyObject->AddComponent(sprite);
-	monkeyObject->AddComponent(playerMovement);
-	monkeyObject->AddComponent(colliderRectangle);
+	// Add all the components
+	playerObject->AddComponent(transform);
+	playerObject->AddComponent(physics);
+	playerObject->AddComponent(sprite);
+	playerObject->AddComponent(playerMovement);
+	playerObject->AddComponent(colliderRectangle);
 
 	//GameObjectFactory::GetInstance().SaveObjectToFile(asteroidObject);
 
-	return monkeyObject;
+	return playerObject;
 }
 
 /*

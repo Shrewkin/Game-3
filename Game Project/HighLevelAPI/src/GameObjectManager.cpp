@@ -210,6 +210,10 @@ void GameObjectManager::DestroyObjects()
 			gameObjectActiveList[i] = gameObjectActiveList[numObjects];
 			gameObjectActiveList[numObjects] = nullptr;		
 		}
+		else 
+		{
+			i++;
+		}
 	}
 }
 

@@ -18,6 +18,7 @@ file Archetypes.h.
 #include "PlayerShip.h"
 #include "TimedDeath.h"
 #include "ScreenWrap.h"
+#include "Collider.h"
 #include "ColliderPoint.h"
 #include "ColliderCircle.h"
 #include "ColliderRectangle.h"
@@ -38,6 +39,7 @@ file Archetypes.h.
 #include "TileMap.h"
 #include "EnemyOne.h"
 #include "EnemySpawner.h"
+#include "PlayerShooting.h"
 #include "Health.h"
 
 
@@ -267,7 +269,7 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 // Create a game object archetype that uses the Player texture.
 // Returns:
 //	 A pointer to the newly constructed game object
-GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
+GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, GameObject* beam, Collider* map)
 {
 	// Create object and initilize all components
 	GameObject* playerObject = new GameObject("Player");
@@ -276,6 +278,7 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 	Sprite* sprite = new Sprite();
 	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
 	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
+	Behaviors::PlayerShooting* playerShooting = new Behaviors::PlayerShooting(beam, map);
 
 	transform->SetScale(Vector2D(50.0f, 50.0f));
 	sprite->SetMesh(mesh);
@@ -287,6 +290,7 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 	playerObject->AddComponent(sprite);
 	playerObject->AddComponent(playerMovement);
 	playerObject->AddComponent(colliderRectangle);
+	playerObject->AddComponent(playerShooting);
 
 	//GameObjectFactory::GetInstance().SaveObjectToFile(asteroidObject);
 
@@ -340,6 +344,31 @@ GameObject* Archetypes::CreateEnemyObject(Mesh * mesh, Vector2D spawnPos/*, Spri
 	enemyObject->AddComponent(enemy);
 
 	return enemyObject;
+}
+
+// Create the laser beams object.
+// Params:
+//   mesh  = The mesh to use for the object's sprite.
+//	 spriteSource = The sprite source to use for the object.
+// Returns:
+//	 A pointer to the newly constructed game object
+GameObject* Archetypes::CreateLaserBeamObject(Mesh * mesh)
+{
+	//initilize all components
+	Transform* transform = new Transform(0.0f, 0.0f);
+	transform->SetScale(Vector2D(20.0f, 20.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+
+	//create object add all the components
+	GameObject* laser = new GameObject("LaserBeam");
+	laser->AddComponent(transform);
+	laser->AddComponent(sprite);
+
+	//GameObjectFactory::GetInstance().SaveObjectToFile(bullet);
+
+	return laser;
 }
 
 /*

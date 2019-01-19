@@ -27,6 +27,7 @@ class GameObject;
 class SpriteSource;
 class Mesh;
 class Tilemap;
+class Collider;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -95,11 +96,20 @@ namespace Archetypes
 	// Create a game object archetype that uses the Asteroid texture.
 	// Returns:
 	//	 A pointer to the newly constructed game object
-	GameObject* CreatePlayer(Mesh* mesh, SpriteSource* spriteSource);
+	GameObject* CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, GameObject* beam, Collider* map);
 	
 	GameObject* CreateEnemySpawner();
 
 	GameObject* CreateEnemyObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+
+
+	// Create the laser beams object.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//	 spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
+	GameObject* CreateLaserBeamObject(Mesh* mesh);
 	
 }
 

@@ -26,6 +26,7 @@
 #include "Texture.h"
 #include "EnemyOne.h"
 #include "EnemySpawner.h"
+#include <Collider.h>
 #include <Graphics.h>
 #include <Engine.h>
 
@@ -88,8 +89,12 @@ namespace Levels
 		Graphics& graphics = Graphics::GetInstance();
 		graphics.SetBackgroundColor(Colors::Grey);
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemySpawner());
-		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer));
-		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap));
+		GameObject* map = Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap);
+		GetSpace()->GetObjectManager().AddObject(*map);
+		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
+		GetSpace()->GetObjectManager().AddObject(*map);
+		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
+			static_cast<Collider*>( map->GetComponent("Collider") )));
 	}
 
 	// Update Level 2.

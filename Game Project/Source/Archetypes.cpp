@@ -276,7 +276,6 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 	Sprite* sprite = new Sprite();
 	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
 	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
-	Behaviors::Health* health = new Behaviors::Health(5, 2.0f);
 
 	transform->SetScale(Vector2D(50.0f, 50.0f));
 	sprite->SetMesh(mesh);
@@ -287,7 +286,6 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource)
 	playerObject->AddComponent(physics);
 	playerObject->AddComponent(sprite);
 	playerObject->AddComponent(playerMovement);
-	playerObject->AddComponent(health);
 	playerObject->AddComponent(colliderRectangle);
 
 	//GameObjectFactory::GetInstance().SaveObjectToFile(asteroidObject);

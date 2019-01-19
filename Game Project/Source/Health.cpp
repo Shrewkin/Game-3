@@ -13,55 +13,18 @@
 
 #include "Health.h"
 #include "GameObject.h"
-#include "Sprite.h"
 
 namespace Behaviors
 {
 
-	Health::Health(int maxHealth, float invTime)
-		: Component("Health"), maxHealth(maxHealth), currHealth(maxHealth), invincibilityTime(invTime), flashTimer(0.2f),
-		  timer1(invTime), timer2(0.1f), invincible(false), invAlpha(0.5f)
+	Health::Health(int maxHealth)
+		: Component("Health"), maxHealth(maxHealth), currHealth(maxHealth)
 	{
 	}
 
 	Component* Health::Clone() const
 	{
 		return new Health(*this);
-	}
-
-	void Health::Initialize()
-	{
-		sprite = static_cast<Sprite*>(GetOwner()->GetComponent("Sprite"));
-	}
-
-	void Health::Update(float dt)
-	{
-		if (invincible)
-		{
-			timer1 -= dt;
-			timer2 -= dt;
-
-			if (timer2 <= 0)
-			{
-				timer2 = flashTimer;
-
-				if (sprite->GetAlpha() == invAlpha)
-				{
-					sprite->SetAlpha(1.0f);
-				}
-				else
-				{
-					sprite->SetAlpha(invAlpha);
-				}
-			}
-
-			if (timer1 <= 0)
-			{
-				timer1 = invincibilityTime;
-				invincible = false;
-				sprite->SetAlpha(1.0f);
-			}
-		}
 	}
 
 	void Health::Add(int toAdd)
@@ -72,14 +35,10 @@ namespace Behaviors
 
 	void Health::Subtract(int toSubtract)
 	{
-		if(!invincible)
+		currHealth -= toSubtract;
+		if (currHealth <= 0)
 		{
-			currHealth -= toSubtract;
-			invincible = true;
-			if (currHealth <= 0)
-			{
-				GetOwner()->Destroy();
-			}
+			GetOwner()->Destroy();
 		}
 	}
 

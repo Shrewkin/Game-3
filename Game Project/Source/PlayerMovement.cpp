@@ -18,8 +18,6 @@
 #include "Physics.h"
 #include "Space.h"
 #include "Graphics.h"
-#include "Health.h"
-#include "TimedDeath.h"
 
 namespace Behaviors
 {
@@ -76,18 +74,16 @@ namespace Behaviors
 			}
 		}
 
-		Health* health = static_cast<Health*>(object.GetComponent("Health"));
-
 		//if the object is named hazard, kill the player
-		if (other.GetName() == "Bullet" && static_cast<TimedDeath*>(other.GetComponent("TimedDeath"))->GetEnemyBool())
+		if (other.GetName()._Equal("Hazard"))
 		{
-			health->Subtract(1);
-			other.Destroy();
+			object.GetSpace()->RestartLevel();
 		}
 
-		if (other.GetName() == "Enemy")
+		//if the object is named enemy, kill the player
+		if (other.GetName()._Equal("Enemy"))
 		{
-			health->Subtract(1);
+			object.GetSpace()->RestartLevel();
 		}
 	}
 
@@ -96,11 +92,6 @@ namespace Behaviors
 	{
 		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 		physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
-
-		Collider* collider = static_cast<Collider*>(GetOwner()->GetComponent("Collider"));
-
-		collider->SetMapCollisionHandler(PlayerMapCollisionHandler);
-		collider->SetCollisionHandler(PlayerCollisionHandler);
 	}
 
 	// Fixed update function for this component.

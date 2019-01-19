@@ -58,6 +58,17 @@ namespace Behaviors
 			static_cast<Health*>(owner.GetComponent("Health"))->Subtract(1);
 			other.Destroy();
 		}
+
+		if (other.GetName() == "Enemy" || other.GetName() == "Player")
+		{
+			Physics* ownerPhysics = static_cast<Physics*>(owner.GetComponent("Physics"));
+			Physics* otherPhysics = static_cast<Physics*>(other.GetComponent("Physics"));
+			Transform* ownerTransform = static_cast<Transform*>(owner.GetComponent("Transform"));
+			Transform* otherTransform = static_cast<Transform*>(other.GetComponent("Transform"));
+
+			ownerTransform->SetTranslation(ownerPhysics->GetOldTranslation());
+			otherTransform->SetTranslation(otherPhysics->GetOldTranslation());
+		}
 	}
 
 	void EnemyOne::Initialize()

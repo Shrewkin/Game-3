@@ -1,5 +1,22 @@
-﻿  GameLevel.cpp
-  CS230Lab8.vcxproj -> C:\Users\Striz\OneDrive\Desktop\Unity Tower Defense\Game\Game-3\Game Project\\x64\Debug\BetaFramework.exe
+﻿  stdafx.cpp
+  TimedDeath.cpp
+  ScreenWrap.cpp
+  PlayerShip.cpp
+  PlayerMovement.cpp
+  MonkeyMovement.cpp
+  Main.cpp
+  Level3.cpp
+  Level1.cpp
+  Level2.cpp
+  Health.cpp
+  GameLevel.cpp
+  EnemySpawner.cpp
+  EnemyOne.cpp
+  ColorChange.cpp
+  Archetypes.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  CS230Lab8.vcxproj -> C:\Users\bar.benzvi\Documents\GitHub\Game-3\Game Project\\x64\Debug\BetaFramework.exe
   glfw\lib\x64\glfw3.dll
   1 File(s) copied
   fmod\lib\fmodL64.dll

@@ -271,6 +271,9 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 //	 A pointer to the newly constructed game object
 GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, GameObject* beam, Collider* map)
 {
+	UNREFERENCED_PARAMETER(beam);
+	UNREFERENCED_PARAMETER(map);
+
 	// Create object and initilize all components
 	GameObject* playerObject = new GameObject("Player");
 	Transform* transform = new Transform(0.0f, 0.0f);

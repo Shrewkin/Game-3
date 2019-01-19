@@ -63,6 +63,8 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
+		void Shutdown() override;
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Functions:
@@ -76,7 +78,7 @@ namespace Behaviors
 		// Shoots a laser beam based on the player's aim vector
 		// Params:
 		//	aim = Vector2D that holds the player's aim vector
-		void Shoot(Vector2D aim, Vector2D result);
+		void Shoot(Vector2D& aim, Vector2D& result);
 
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -89,7 +91,9 @@ namespace Behaviors
 		float beamWidth;
 
 		//ray
+		GameObject** colliders;
 		Collider* worldMap;
+		Vector2D offScreen = Vector2D(1000.0f, 1000.0f);
 
 		// beam
 		Color coolColor;

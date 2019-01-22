@@ -90,6 +90,8 @@ namespace Behaviors
 		int rayCastLength;
 		float beamWidth;
 
+		bool beamOn = false;
+
 		//ray
 		GameObject** colliders;
 		Collider* worldMap;

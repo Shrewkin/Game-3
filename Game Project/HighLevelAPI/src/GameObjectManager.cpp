@@ -194,7 +194,7 @@ void GameObjectManager::FixedUpdate(float dt)
 // Destroy any objects marked for destruction.
 void GameObjectManager::DestroyObjects()
 {
-	std::cout << numObjects << std::endl;
+	//std::cout << numObjects << std::endl;
 
 	//foreach game object
 	for (unsigned i = 0; i < numObjects; )

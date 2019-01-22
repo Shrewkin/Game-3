@@ -247,7 +247,7 @@ GameObject * Archetypes::CreateTilemapObject(Mesh * mesh, SpriteSource * spriteS
 {
 	//initilize all components
 	Transform* transform = new Transform(-366.5f, 281.0f);
-	transform->SetScale(Vector2D(50.0f, 50.0f));
+	transform->SetScale(Vector2D(100.0f, 100.0f));
 
 	SpriteTilemap* spriteMap = new SpriteTilemap();
 	spriteMap->SetMesh(mesh);

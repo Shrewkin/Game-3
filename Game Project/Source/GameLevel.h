@@ -93,8 +93,9 @@ namespace Levels
 		int score;
 		// Amount of damage that the weapon currently deals to each enemy it comes in contact with.
 		// Current Damage will change with the more upgrades that the player has.
-		int currentDamage;
+		float currentDamage;
 		int damageDealt;
+		int enemiesAlive;
 	};
 }
 

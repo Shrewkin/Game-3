@@ -34,6 +34,8 @@ namespace Behaviors
 
 		void Update(float dt) override;
 
+		unsigned getToSpawn();
+
 	private:
 
 		void SpawnWave();

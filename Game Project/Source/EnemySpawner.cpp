@@ -26,8 +26,18 @@
 namespace Behaviors
 {
 	EnemySpawner::EnemySpawner()
-		: Component("EnemySpawner"), spawnPos(300.0f, 200.0f), baseSpawnCount(2), randSpawnOffset(25.0f), spawnTimer(0.3f),
-		  spawnChance(1), toSpawn(0), currWave(0), waveCountModifier(4), waveTimer(5.0f), timer1(0.3f), timer2(5.0f)
+		: Component("EnemySpawner")
+		, spawnPos(300.0f, 200.0f)
+		, baseSpawnCount(2)
+		, randSpawnOffset(25.0f)
+		, spawnTimer(0.3f)
+		, spawnChance(1)
+		, toSpawn(0)
+		, currWave(0)
+		, waveCountModifier(4)
+		, waveTimer(5.0f)
+		, timer1(0.3f)
+		, timer2(5.0f)
 	{
 	}
 
@@ -49,7 +59,7 @@ namespace Behaviors
 	void EnemySpawner::Update(float dt)
 	{
 		unsigned currCount = GetOwner()->GetSpace()->GetObjectManager().GetObjectCount("Enemy");
-		std::cout << currCount << std::endl;
+		//std::cout << currCount << std::endl;
 
 		if (currCount == 0 && toSpawn == 0)
 		{
@@ -71,6 +81,11 @@ namespace Behaviors
 			}
 		}
 
+	}
+
+	unsigned EnemySpawner::getToSpawn()
+	{
+		return toSpawn;
 	}
 
 	void EnemySpawner::SpawnWave()
@@ -119,8 +134,5 @@ namespace Behaviors
 		GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
 
 		--toSpawn;
-
-
 	}
-
 }

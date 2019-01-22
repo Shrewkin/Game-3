@@ -46,8 +46,9 @@ namespace Levels
 		, timer(0)
 		, score(0)
 		// When weapons are implemented and we merge the branches, multiply a modifier by the amount currently being dealt
-		, currentDamage(100)
+		, currentDamage(50)
 		, damageDealt(0)
+		, enemiesAlive(0)
 	{
 	}
 
@@ -132,6 +133,11 @@ namespace Levels
 	// Updates Game Variables
 	void GameLevel::GameManager(float dt)
 	{
+		// Timer and damage stuff
 		timer += dt;
+		//
+		//enemiesAlive = GetSpace()->GetObjectManager().GetObjectCount("Enemy");
+		//
+		//std::cout << score << ' ' << enemiesAlive << std::endl;
 	}
 }

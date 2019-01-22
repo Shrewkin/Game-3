@@ -194,8 +194,10 @@ void GameObjectManager::FixedUpdate(float dt)
 // Destroy any objects marked for destruction.
 void GameObjectManager::DestroyObjects()
 {
+	//std::cout << numObjects << std::endl;
+
 	//foreach game object
-	for (unsigned i = 0; i < numObjects; ++i)
+	for (unsigned i = 0; i < numObjects; )
 	{
 		//check if destroyed
 		if (gameObjectActiveList[i]->IsDestroyed())
@@ -215,6 +217,19 @@ void GameObjectManager::DestroyObjects()
 			i++;
 		}
 	}
+
+	/*
+	for (unsigned i = 0; i < numObjects; ++i)
+	{
+		//std::cout << gameObjectActiveList[i]->GetName() << std::endl;
+
+		//check if destroyed
+		if (gameObjectActiveList[i]->IsDestroyed())
+		{
+			std::cout << "WAT" << std::endl;
+		}
+	}
+	*/
 }
 
 // Draw all game objects in the active game object list.

@@ -93,7 +93,7 @@ namespace Levels
 		GameObject* map = Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap);
 		GetSpace()->GetObjectManager().AddObject(*map);
 		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
-		GetSpace()->GetObjectManager().AddObject(*map);
+		GetSpace()->GetObjectManager().AddObject(*beam);
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
 			static_cast<Collider*>( map->GetComponent("Collider") )));
 	}

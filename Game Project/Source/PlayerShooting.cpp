@@ -54,53 +54,102 @@ namespace Behaviors
 	{
 		overHeating = 0.0f;
 
-		coolColor = Colors::Red;
-		hotColor = Colors::White;
+		coolColor = Colors::LightBlue;
+		hotColor = Colors::Violet;
 
 		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 
 		laserBeamTransform =  static_cast<Transform*>( laserBeamObject->GetComponent("Transform") );
 		laserBeamSprite = static_cast<Sprite*>(laserBeamObject->GetComponent("Sprite"));
+
+		colliders = new GameObject*[rayCastLength];
+
+		//ray cast
+		for (int i = 0; i < rayCastLength; i++)
+		{
+			GameObject* obj = new GameObject("RayPoint");
+			Transform* objTransform = new Transform(offScreen);
+			ColliderRectangle* collider = new ColliderRectangle(Vector2D(10.0f, 10.0f));
+			obj->AddComponent(objTransform);
+			obj->AddComponent(collider);
+
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*obj);
+
+			colliders[i] = obj;
+		}
 	}
 
 	// Update function for this component.
 	// Params:
 	//   dt = The (fixed) change in time since the last step.
 	void PlayerShooting::Update(float dt)
-
 	{
+		//scale the laserbeam coloor
+		laserBeamSprite->SetColor(Interpolate(coolColor, hotColor, overHeating / maxHeat));
+
 		if (Input::GetInstance().CheckHeld(VK_LBUTTON))
 		{
 			//check heat
 			if (overHeating <= maxHeat)
 			{
+				if (!beamOn)
+				{
+					beamOn = true;
+				}
+
 				//update overheating with delta time
-				overHeating += dt;
+				overHeating += dt * 2;
 
 				//shoot
 				Vector2D aim = GetAim();
 
-				Vector2D result = Vector2D(0.0f, 0.0f);
+				Vector2D result(0.0f, 0.0f);
 
 				Shoot( aim, result );
 
 				//draw beam
 				laserBeamSprite->SetAlpha(1);
 
+				laserBeamTransform->SetTranslation( transform->GetTranslation().Midpoint(result + transform->GetTranslation()));
 				laserBeamTransform->SetRotation(atan2f(aim.y, aim.x));
 				laserBeamTransform->SetScale( Vector2D( result.Magnitude(), beamWidth) );
 			}
+			else
+			{
+				//ray cast collider off
+				for (int i = 0; i < rayCastLength; i++)
+				{
+					Transform* objTransform = static_cast<Transform*>(colliders[i]->GetComponent("Transform"));
+					objTransform->SetTranslation(Vector2D(1000.0f, 1000.0f));
+				}
+
+				laserBeamSprite->SetAlpha(0);
+			}
 		}
 		else
-		{
+		{ 
+			if (beamOn)
+			{
+				beamOn = false;
+
+				//ray cast collider off
+				for (int i = 0; i < rayCastLength; i++)
+				{
+					Transform* objTransform = static_cast<Transform*>(colliders[i]->GetComponent("Transform"));
+					objTransform->SetTranslation(Vector2D(1000.0f, 1000.0f));
+				}
+			}
+
 			laserBeamSprite->SetAlpha(0);
 
-			//update cooldown with delta time
+			//update cooldown with delta time	
 			overHeating -= dt;
 		}		
+	}
 
-		laserBeamTransform->SetTranslation(transform->GetTranslation());
-		laserBeamSprite->SetColor(Interpolate(coolColor, hotColor, 1.0f / overHeating));
+	void PlayerShooting::Shutdown()
+	{
+		delete colliders;
 	}
 
 	//------------------------------------------------------------------------------
@@ -115,28 +164,29 @@ namespace Behaviors
 		//get direction on screen
 		Vector2D scrnPos = Input::GetInstance().GetCursorPosition();
 
-		//Graphics::GetInstance()
-
+		Vector2D aim = Graphics::GetInstance().ScreenToWorldPosition(scrnPos);
+		
 		//return that normalized, should be equal to a world coordinate vector
-		return scrnPos.Normalized();
+		return  (aim - transform->GetTranslation()).Normalized();
 	}
 
 	// Shoots a laser beam based on the player's aim vector
 	// Params:
 	//	aim = Vector2D that holds the player's aim vector
-	void PlayerShooting::Shoot(Vector2D aim, Vector2D result)
+	void PlayerShooting::Shoot(Vector2D& aim, Vector2D& result)
 	{
-		//ray cast
-		for (float i = 0; i < rayCastLength; ++i)
-		{
-			GameObject* obj = new GameObject("RayPoint");
-			Transform* objTransform = new Transform(aim * (i + 1.0f) * 10.0f);
-			ColliderRectangle* collider = new ColliderRectangle(Vector2D(10.0f, 10.0f));
-			obj->AddComponent(objTransform);
-			obj->AddComponent(collider);
+		UNREFERENCED_PARAMETER(aim);
+		UNREFERENCED_PARAMETER(result);
 
-			GetOwner()->GetSpace()->GetObjectManager().AddObject(*obj);
-			obj->Destroy();		
+		//ray cast
+		for (int i = 0; i < rayCastLength; i++)
+		{
+			Transform* objTransform = static_cast<Transform*>( colliders[i]->GetComponent("Transform"));
+			result = Vector2D(aim * (i + 1.0f) * 20.0f);
+
+			objTransform->SetTranslation(result + transform->GetTranslation());
+
+			Collider* collider = static_cast<Collider*>(colliders[i]->GetComponent("Collider"));
 
 			if (worldMap != nullptr)
 			{
@@ -146,8 +196,6 @@ namespace Behaviors
 					return;
 				}
 			}
-
-			result = objTransform->GetTranslation();
 		}
 	}
 }

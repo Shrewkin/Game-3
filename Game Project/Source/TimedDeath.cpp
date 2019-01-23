@@ -16,6 +16,7 @@ file TimedDeath.h.
 #include "TimedDeath.h"
 
 #include "GameObject.h"
+#include "ColliderTilemap.h"
 
 
 namespace Behaviors
@@ -38,6 +39,17 @@ namespace Behaviors
 	Component* TimedDeath::Clone() const
 	{
 		return new TimedDeath(*this);
+	}
+
+	void BulletMapCollisionHandler(GameObject& object, const MapCollision& collision)
+	{
+		UNREFERENCED_PARAMETER(collision);
+		object.Destroy();
+	}
+
+	void TimedDeath::Initialize()
+	{
+		static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(BulletMapCollisionHandler);
 	}
 
 	// Update function for this component.

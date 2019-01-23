@@ -46,7 +46,7 @@ namespace Behaviors
 		unsigned baseSpawnCount;
 		float randSpawnOffset;
 		float spawnTimer;
-		unsigned spawnChance; //I couldn't think of another name for this, but it's used to choose enemy types based on the wave
+		std::vector<int> spawnChance; //I couldn't think of another name for this, but it's used to choose enemy types based on the wave
 						//(used when we add more enemies)
 		unsigned toSpawn;
 

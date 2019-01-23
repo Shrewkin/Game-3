@@ -100,7 +100,8 @@ namespace Archetypes
 	
 	GameObject* CreateEnemySpawner();
 
-	GameObject* CreateEnemyObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+	GameObject* CreateEnemyOneObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+	GameObject* CreateEnemyThreeObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
 
 
 	// Create the laser beams object.

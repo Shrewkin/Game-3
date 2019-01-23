@@ -30,11 +30,11 @@ namespace Behaviors
 		, spawnPos(300.0f, 200.0f)
 		, baseSpawnCount(2)
 		, randSpawnOffset(25.0f)
-		, spawnTimer(0.3f)
+		, spawnTimer(0.5f)
 		, spawnChance(1)
 		, toSpawn(0)
 		, currWave(0)
-		, waveCountModifier(4)
+		, waveCountModifier(2)
 		, waveTimer(5.0f)
 		, timer1(0.3f)
 		, timer2(5.0f)
@@ -92,10 +92,20 @@ namespace Behaviors
 	{
 		++currWave;
 		toSpawn = baseSpawnCount + ((currWave - (currWave % waveCountModifier)) / waveCountModifier);
-		spawnChance = static_cast<int>(static_cast<float>((currWave / waveCountModifier)) * log2f(static_cast<float>(currWave)));
-		if (spawnChance == 0)
+		
+		spawnChance.clear();
+
+		if (currWave < 5)
 		{
-			spawnChance = 1;
+			spawnChance.push_back(1);
+		}
+		else
+		{
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(3);
 		}
 	}
 
@@ -128,10 +138,18 @@ namespace Behaviors
 		enemyPos += Vector2D(RandomRange(-randSpawnOffset, randSpawnOffset), RandomRange(-randSpawnOffset, randSpawnOffset));
 
 		//Generate a random num for enemy spawn (used when we have more enemy types)
-		//int randSpawn = RandomRange(1, spawnChance);
+		int randSpawn = spawnChance[RandomRange(0, static_cast<int>(spawnChance.size() - 1))];
 
-		GameObject* enemy = Archetypes::CreateEnemyObject(enemy1Mesh, enemyPos);
-		GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
+		if (randSpawn == 1)
+		{
+			GameObject* enemy = Archetypes::CreateEnemyOneObject(enemy1Mesh, enemyPos);
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
+		}
+		else if(randSpawn == 3)
+		{
+			GameObject* enemy = Archetypes::CreateEnemyThreeObject(enemy1Mesh, enemyPos);
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
+		}
 
 		--toSpawn;
 	}

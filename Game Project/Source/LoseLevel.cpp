@@ -45,6 +45,8 @@ namespace Levels
 	{
 		std::cout << "LoseLevel::Load" << std::endl;
 
+		Graphics::GetInstance().SetBackgroundColor(Colors::Black);
+
 		textureScreen = Texture::CreateTextureFromFile("EndScreen.png");
 		spriteSourceScreen = new SpriteSource(1, 1, textureScreen);
 
@@ -58,11 +60,14 @@ namespace Levels
 
 		GameObject* screen = new GameObject("Screen");
 
+		Transform* transform = new Transform( Vector2D(0.0f, 0.0f), Vector2D(500.0f, 500.0f), 0.0f);
+
 		Sprite* sprite = new Sprite();
 		sprite->SetMesh(meshScreen);
 		sprite->SetSpriteSource(spriteSourceScreen);
 
 		screen->AddComponent(sprite);
+		screen->AddComponent(transform);
 
 		GetSpace()->GetObjectManager().AddObject(*screen);
 	}

@@ -13,6 +13,7 @@
 #include "GameLevel.h"
 
 #include "Archetypes.h"
+#include "LoseLevel.h"
 #include "Space.h"
 #include "Tilemap.h"
 #include "Physics.h"
@@ -106,10 +107,10 @@ namespace Levels
 		UNREFERENCED_PARAMETER(dt);
 
 		// The following is made for gameplay testing purposes (can be considered cheat COdes)
-		//if (Input::GetInstance().CheckTriggered('1'))
-		//{
-		//
-		//}
+		if ( Input::GetInstance().CheckTriggered('1'))
+		{
+			GetSpace()->SetLevel(new Levels::LoseLevel() );
+		}
 
 		GameManager(dt);
 	}

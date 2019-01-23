@@ -41,6 +41,7 @@ file Archetypes.h.
 #include "EnemySpawner.h"
 #include "PlayerShooting.h"
 #include "Health.h"
+#include "EnemyThree.h"
 
 
 //==================================================================-
@@ -336,7 +337,7 @@ GameObject* Archetypes::CreateEnemyObject(Mesh * mesh, Vector2D spawnPos/*, Spri
 
 	Behaviors::Health* health = new Behaviors::Health(5);
 
-	Behaviors::EnemyOne* enemy = new Behaviors::EnemyOne(1.0f, 100.0f, 150.0f, 250.0f, 300.0f);
+	Behaviors::EnemyThree* enemy = new Behaviors::EnemyThree(/*1.0f, 100.0f, 150.0f, 250.0f, 300.0f*/);
 
 	//create object add all the components
 	GameObject* enemyObject = new GameObject("Enemy");

@@ -1,13 +1,13 @@
-//------------------------------------------------------------------------------
-//
-// File Name:	GameLevel.h
-// Author(s):	Jeremy Kings (j.kings)
-// Project:		BetaFramework
-// Course:		WANIC VGP2 2018-2019
-//
-// Copyright © 2018 DigiPen (USA) Corporation.
-//
-//------------------------------------------------------------------------------
+/*
+/file   Loselevel.h
+/author Jakob McFarland
+/date   1/22/2019
+/brief
+
+This is the specification file for all member functions
+of the level LoseLevel.
+
+*/
 
 #pragma once
 
@@ -36,31 +36,29 @@ class Tilemap;
 
 namespace Levels
 {
-	class GameLevel : public Level
+	class LoseLevel : public Level
 	{
 	public:
 		//------------------------------------------------------------------------------
 		// Public Functions:
 		//------------------------------------------------------------------------------
 
-		// Creates an instance of Level 2.
-		GameLevel();
+		// Creates an instance of LoseLevel.
+		LoseLevel();
 
-		// Load the resources associated with Level 2.
+		// Load the resources associated with LoseLevel.
 		void Load() override;
 
-		// Initialize the memory associated with Level 2.
+		// Initialize the memory associated with LoseLevel.
 		void Initialize() override;
 
-		// Update Level 2.
+		// Update LoseLevel.
 		// Params:
 		//	 dt = Change in time (in seconds) since the last game loop.
 		void Update(float dt) override;
 
-		// Unload the resources associated with Level 2.
+		// Unload the resources associated with LoseLevel.
 		void Unload() override;
-
-		void GameManager(float dt);
 
 	private:
 
@@ -68,34 +66,10 @@ namespace Levels
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		// Monkey
-		Mesh* meshPlayer;
-		Texture* texturePlayer;
-		SpriteSource* spriteSourcePlayer;
-
-		// Bullet
-		Mesh* meshBullet;
-
-		unsigned columnsPlayer;
-		unsigned rowsPlayer;
-
-		// Tilemap
-		Tilemap* dataMap;
-		Texture* textureMap;
-		SpriteSource* spriteSourceMap;
-		Mesh* meshMap;
-
-		unsigned columnsMap;
-		unsigned rowsMap;
-
-		// Game Manager Data
-		float timer;
-		int score;
-		// Amount of damage that the weapon currently deals to each enemy it comes in contact with.
-		// Current Damage will change with the more upgrades that the player has.
-		float currentDamage;
-		int damageDealt;
-		int enemiesAlive;
+		//screen
+		Mesh* meshScreen;
+		Texture* textureScreen;
+		SpriteSource* spriteSourceScreen;
 	};
 }
 

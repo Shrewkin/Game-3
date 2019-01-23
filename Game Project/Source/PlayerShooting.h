@@ -1,7 +1,7 @@
 /*
 /file   PlayerShooting.h
 /author Jakob McFarland
-/date   1/16/2019
+/date   1/22/2019
 /brief
 
 This is the specification file for all member functions

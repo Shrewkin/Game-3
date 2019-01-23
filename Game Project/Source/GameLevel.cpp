@@ -36,7 +36,7 @@ namespace Levels
 	// Public Methods:
 	//==================================================================-
 
-	// Creates an instance of Level 2.
+	// Creates an instance of GameLevel.
 	GameLevel::GameLevel()
 		: Level("Level2")
 		, columnsPlayer(1)
@@ -52,7 +52,7 @@ namespace Levels
 	{
 	}
 
-	// Load the resources associated with Level 2.
+	// Load the resources associated with GameLevel.
 	void GameLevel::Load()
 	{
 		std::cout << "Level2::Load" << std::endl;
@@ -82,7 +82,7 @@ namespace Levels
 		meshMap = CreateQuadMesh(Vector2D(0.0625f, 0.0833333f), Vector2D(0.5, 0.5));
 	}
 
-	// Initialize the memory associated with Level 2.
+	// Initialize the memory associated with GameLevel.
 	void GameLevel::Initialize()
 	{
 		std::cout << "Level2::Initialize" << std::endl;
@@ -98,7 +98,7 @@ namespace Levels
 			static_cast<Collider*>( map->GetComponent("Collider") )));
 	}
 
-	// Update Level 2.
+	// Update GameLevel.
 	// Params:
 	//	 dt = Change in time (in seconds) since the last game loop.
 	void GameLevel::Update(float dt)
@@ -114,7 +114,7 @@ namespace Levels
 		GameManager(dt);
 	}
 
-	// Unload the resources associated with Level 2.
+	// Unload the resources associated with GameLevel.
 	void GameLevel::Unload()
 	{
 		std::cout << "Level2::Unload" << std::endl;

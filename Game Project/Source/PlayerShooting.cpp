@@ -178,22 +178,32 @@ namespace Behaviors
 		UNREFERENCED_PARAMETER(aim);
 		UNREFERENCED_PARAMETER(result);
 
+		cutoff = false;
+
 		//ray cast
 		for (int i = 0; i < rayCastLength; i++)
 		{
 			Transform* objTransform = static_cast<Transform*>( colliders[i]->GetComponent("Transform"));
-			result = Vector2D(aim * (i + 1.0f) * 20.0f);
 
-			objTransform->SetTranslation(result + transform->GetTranslation());
-
-			Collider* collider = static_cast<Collider*>(colliders[i]->GetComponent("Collider"));
-
-			if (worldMap != nullptr)
+			if (cutoff)
 			{
-				//stop at tilemap
-				if (collider->IsCollidingWith(*worldMap))
+				objTransform->SetTranslation(Vector2D(1000.0f, 1000.0f));
+			}
+			else
+			{
+				result = Vector2D(aim * (i + 1.0f) * 20.0f);
+
+				objTransform->SetTranslation(result + transform->GetTranslation());
+
+				Collider* collider = static_cast<Collider*>(colliders[i]->GetComponent("Collider"));
+
+				if (worldMap != nullptr)
 				{
-					return;
+					//stop at tilemap
+					if (collider->IsCollidingWith(*worldMap))
+					{
+						cutoff = true;
+					}
 				}
 			}
 		}

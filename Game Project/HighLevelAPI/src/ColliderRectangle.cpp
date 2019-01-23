@@ -72,14 +72,9 @@ void ColliderRectangle::SetExtents(const Vector2D& extents_)
 //	 Return the results of the collision check.
 bool ColliderRectangle::IsCollidingWith(const Collider& other) const
 {
-	//point collision
-	if (other.GetType() == ColliderType::ColliderTypePoint)
-	{
-		return other.IsCollidingWith(*this);
 
-	}
 	//circle collision
-	else if (other.GetType() == ColliderType::ColliderTypeCircle)
+	if (other.GetType() == ColliderType::ColliderTypeCircle)
 	{
 		const ColliderCircle& circle = static_cast<const ColliderCircle&>(other);
 		Transform* otherTransform = static_cast<Transform*>(circle.GetOwner()->GetComponent("Transform"));
@@ -95,6 +90,10 @@ bool ColliderRectangle::IsCollidingWith(const Collider& other) const
 		return RectangleRectangleIntersection(
 			BoundingRectangle( transform->GetTranslation(), Vector2D(transform->GetScale() * 0.5f) ),
 			BoundingRectangle( otherTransform->GetTranslation(), Vector2D(otherTransform->GetScale() * 0.5f) ));
+	}
+	else 
+	{
+		return other.IsCollidingWith(*this);
 	}
 
 	return false;

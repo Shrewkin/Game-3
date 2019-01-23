@@ -18,6 +18,8 @@
 #include "Physics.h"
 #include "Space.h"
 #include "Graphics.h"
+#include "Health.h"
+#include "TimedDeath.h"
 
 namespace Behaviors
 {
@@ -41,19 +43,6 @@ namespace Behaviors
 	Component* PlayerMovement::Clone() const
 	{
 		return new PlayerMovement(*this);
-	}
-
-	// Map collision handler for Player objects.
-	// Params:
-	//   object = The Player object.
-	//   collision = Which sides the Player collided on.
-	void PlayerMapCollisionHandler(GameObject& object,
-		const MapCollision& collision)
-	{
-		if (collision.bottom)
-		{
-			static_cast<PlayerMovement*>(object.GetComponent("PlayerMovement"))->onGround = true;
-		}
 	}
 
 	// Collision handler for Player.
@@ -83,7 +72,16 @@ namespace Behaviors
 		//if the object is named enemy, kill the player
 		if (other.GetName()._Equal("Enemy"))
 		{
-			object.GetSpace()->RestartLevel();
+			static_cast<Health*>(object.GetComponent("Health"))->Subtract(1);
+		}
+
+		if (other.GetName() == "Bullet")
+		{
+			if (static_cast<TimedDeath*>(other.GetComponent("TimedDeath"))->GetEnemyBool())
+			{
+				static_cast<Health*>(object.GetComponent("Health"))->Subtract(1);
+				other.Destroy();
+			}
 		}
 	}
 
@@ -92,6 +90,10 @@ namespace Behaviors
 	{
 		transform = static_cast<Transform*>(GetOwner()->GetComponent("Transform"));
 		physics = static_cast<Physics*>(GetOwner()->GetComponent("Physics"));
+		Collider* collider = static_cast<Collider*>(GetOwner()->GetComponent("Collider"));
+		health = static_cast<Health*>(GetOwner()->GetComponent("Health"));
+
+		collider->SetCollisionHandler(PlayerCollisionHandler);
 	}
 
 	// Fixed update function for this component.

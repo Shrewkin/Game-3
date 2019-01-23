@@ -30,12 +30,14 @@ class Transform;
 class Physics;
 struct MapCollision;
 
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
 
 namespace Behaviors
 {
+	class Health;
 
 	class PlayerMovement : public Component
 	{
@@ -60,18 +62,12 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
-		// Map collision handler for Monkey objects.
-		// Params:
-		//   object = The monkey object.
-		//   collision = Which sides the monkey collided on.
-		friend void PlayerMapCollisionHandler(GameObject& object,
-			const MapCollision& collision);
 
 		// Collision handler for monkey.
 		// Params:
 		//   object = The monkey.
 		//   other  = The object the monkey is colliding with.
-		friend void MonkeyCollisionHandler(GameObject& object, GameObject& other);
+		friend void PlayerCollisionHandler(GameObject& object, GameObject& other);
 
 	private:
 		//------------------------------------------------------------------------------
@@ -96,6 +92,7 @@ namespace Behaviors
 		// Components
 		Transform* transform;
 		Physics* physics;
+		Health* health;
 
 		// Misc
 		bool onGround;

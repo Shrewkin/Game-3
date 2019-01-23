@@ -27,6 +27,7 @@
 
 typedef class Transform Transform;
 typedef class Physics Physics;
+struct MapCollision;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -51,6 +52,10 @@ namespace Behaviors
 		// Returns:
 		//   A pointer to a dynamically allocated clone of the component.
 		Component* Clone() const override;
+
+		friend void BulletMapCollisionHandler(GameObject& object, const MapCollision& collision);
+
+		void Initialize() override;
 
 		// Update function for this component.
 		// Params:

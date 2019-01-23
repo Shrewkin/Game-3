@@ -23,6 +23,7 @@ file ColliderTilemap.h.
 #include "ColliderRectangle.h"
 #include "DebugDraw.h"
 #include "Matrix2DStudent.h"
+#include "ColliderCircle.h"
 
 //------------------------------------------------------------------------------
 // Public Functions:
@@ -87,6 +88,40 @@ bool ColliderTilemap::IsCollidingWith(const Collider& other) const
 
 			return true;
 		}
+	}
+	else if (other.GetType() == ColliderTypeCircle)
+	{
+		const ColliderCircle& circle = static_cast<const ColliderCircle&>(other);
+		Transform* otherTransform = static_cast<Transform*>(other.GetOwner()->GetComponent("Transform"));
+
+		MapCollision collision
+		{
+			false,
+			false,
+			false,
+			false
+		};
+
+		float radius = circle.GetRadius();
+		Vector2D origin = otherTransform->GetTranslation();
+
+		collision.top = IsCollidingAtPosition(origin.x, origin.y + radius);
+		collision.right = IsCollidingAtPosition(origin.x + radius, origin.y);
+		collision.bottom = IsCollidingAtPosition(origin.x, origin.y - radius);
+		collision.left = IsCollidingAtPosition(origin.x - radius, origin.y);
+
+		if (collision.top || collision.right || collision.bottom || collision.left)
+		{
+			MapCollisionEventHandler eventHandler = circle.GetMapCollisionHandler();
+
+			if (eventHandler != nullptr)
+			{
+				eventHandler(*other.GetOwner(), collision);
+			}
+
+			return true;
+		}
+
 	}
 
 	return false;

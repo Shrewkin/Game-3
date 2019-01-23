@@ -1,7 +1,7 @@
 /*
 /file   PlayerShooting.h
 /author Jakob McFarland
-/date   1/16/2019
+/date   1/22/2019
 /brief
 
 This is the specification file for all member functions
@@ -48,7 +48,7 @@ namespace Behaviors
 
 		// Constructor
 		PlayerShooting(GameObject* laserBeamObj_, Collider* worldMap_ = nullptr, float maxheat_ = 5.0f,
-			int beamLength_ = 10, float beamWidth_ = 25.0f);
+			int beamLength_ = 41, float beamWidth_ = 25.0f);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -91,6 +91,7 @@ namespace Behaviors
 		float beamWidth;
 
 		bool beamOn = false;
+		bool cutoff = false;
 
 		//ray
 		GameObject** colliders;

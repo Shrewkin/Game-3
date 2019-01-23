@@ -11,6 +11,7 @@
 
 #include "stdafx.h"
 #include "PlayerMovement.h"
+
 #include "GameObject.h"
 #include "Collider.h"
 #include "Input.h"
@@ -20,6 +21,7 @@
 #include "Graphics.h"
 #include "Health.h"
 #include "TimedDeath.h"
+#include "LoseLevel.h"
 
 namespace Behaviors
 {
@@ -35,6 +37,12 @@ namespace Behaviors
 		, gravity(0.0f, -300.0f)
 		, onGround(false)
 	{
+	}
+
+	// Destructor
+	PlayerMovement::~PlayerMovement()
+	{
+		GetOwner()->GetSpace()->SetLevel( new Levels::LoseLevel() );
 	}
 
 	// Clone a component and return a pointer to the cloned component.

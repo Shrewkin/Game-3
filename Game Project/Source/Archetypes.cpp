@@ -274,6 +274,7 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, Gam
 {
 	UNREFERENCED_PARAMETER(beam);
 	UNREFERENCED_PARAMETER(map);
+	UNREFERENCED_PARAMETER(spriteSource);
 
 	// Create object and initilize all components
 	GameObject* playerObject = new GameObject("Player");
@@ -287,7 +288,7 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, Gam
 
 	transform->SetScale(Vector2D(50.0f, 50.0f));
 	sprite->SetMesh(mesh);
-	sprite->SetSpriteSource(spriteSource);
+	//sprite->SetSpriteSource(spriteSource);
 
 	// Add all the components
 	playerObject->AddComponent(transform);

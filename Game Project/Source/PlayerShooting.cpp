@@ -86,6 +86,7 @@ namespace Behaviors
 	{
 		//scale the laserbeam coloor
 		laserBeamSprite->SetColor(Interpolate(coolColor, hotColor, overHeating / maxHeat));
+		static_cast<Sprite*>( GetOwner()->GetComponent("Sprite") )->SetColor(Interpolate(coolColor, hotColor, overHeating / maxHeat));
 
 		if (Input::GetInstance().CheckHeld(VK_LBUTTON))
 		{

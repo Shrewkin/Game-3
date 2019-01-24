@@ -28,8 +28,8 @@ namespace Behaviors
 	// Constructor
 	// Params:
 	//   timeUntilDeath = Amount of time until the object self-destructs.
-	TimedDeath::TimedDeath(float timeUntilDeath)
-		: Component("TimedDeath"), timeUntilDeath(timeUntilDeath), enemy(false)
+	TimedDeath::TimedDeath(float timeUntilDeath, bool mapCollision)
+		: Component("TimedDeath"), timeUntilDeath(timeUntilDeath), enemy(false), connectMapCollision(mapCollision)
 	{
 	}
 
@@ -49,7 +49,10 @@ namespace Behaviors
 
 	void TimedDeath::Initialize()
 	{
-		static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(BulletMapCollisionHandler);
+		if (connectMapCollision)
+		{
+			static_cast<Collider*>(GetOwner()->GetComponent("Collider"))->SetMapCollisionHandler(BulletMapCollisionHandler);
+		}
 	}
 
 	// Update function for this component.

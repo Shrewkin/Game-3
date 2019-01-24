@@ -78,7 +78,7 @@ namespace Behaviors
 		}
 
 		//if the object is named enemy, kill the player
-		if (other.GetName()._Equal("Enemy"))
+		if (other.GetName()._Equal("Enemy") || other.GetName() == "AcidPool")
 		{
 			static_cast<Health*>(object.GetComponent("Health"))->Subtract(1);
 		}

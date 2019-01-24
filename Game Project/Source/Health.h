@@ -19,7 +19,7 @@ namespace Behaviors
 	class Health : public Component
 	{
 	public:
-		Health(int maxHealth = 5, float invTimer = 0.3f, float flashTime = 0.05f);
+		Health(int maxHealth = 5, float invTimer = 0.3f, float flashTime = 0.05f, GameObject* toCreate = nullptr);
 
 		Component* Clone() const;
 
@@ -28,8 +28,10 @@ namespace Behaviors
 
 		void Update(float dt) override;
 
-		int GetHealth();
-		int GetMaxHealth();
+		int GetHealth() const;
+		int GetMaxHealth() const;
+
+		void SetToCreate(GameObject* newToCreate);
 
 	private:
 
@@ -43,6 +45,8 @@ namespace Behaviors
 		float timer1; //invincibility timer
 		float timer2; //flash timer
 		bool invincible;
+
+		GameObject* toCreate;
 
 	};
 }

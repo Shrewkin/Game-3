@@ -61,6 +61,7 @@ namespace Behaviors
 
 	void EnemyThree::Update(float dt)
 	{
+		//If we still need to shoot
 		if (shotsRemaining > 0)
 		{
 			timer1 -= dt;
@@ -93,12 +94,16 @@ namespace Behaviors
 		{
 			timer2 -= dt;
 
+			//After a break between firing, select a new random shot type
 			if (timer2 <= 0)
 			{
 				int newType = RandomRange(ShotSingle, ShotRing);
 				currType = static_cast<ShotTypes>(newType);
+				
+				//Shots remaining and the time between shots depends on the Shot Type
 				shotsRemaining = timesToShoot / currType;
 				timer1 = shootTimer * currType;
+
 				timer2 = breakTimer;
 			}
 		}
@@ -106,14 +111,22 @@ namespace Behaviors
 
 	void EnemyThree::Shoot(float spreadAngle, int bulletCount)
 	{
+		//Get the direction to the player
 		Vector2D dirToPlayer = playerTransform->GetTranslation() - transform->GetTranslation();
 
+		//Get the angle to the player so we can make the bullets look good later
 		float angleToPlayer = atan2(dirToPlayer.y, dirToPlayer.x);
+
+		//Get the angle of the first bullet
 		float firstAngle = spreadAngle * (static_cast<float>(bulletCount - 1) / 2);
 
+		//Loop through each bullet we have to fire
 		for (int i = 0; i < bulletCount; i++)
 		{
-			float currOffset = firstAngle - (spreadAngle * i);
+			//Calculate the angle offset of this bullet + a lil randomness
+			float currOffset = firstAngle - (spreadAngle * i) + RandomRange(static_cast<float>(-M_PI / 15.0f), static_cast<float>(M_PI / 15.0f));
+
+			//Create the bullet and set it's stuff
 			GameObject* bullet = new GameObject(*bulletArchetype);
 			Vector2D dir = Vector2D::FromAngleRadians(angleToPlayer + currOffset);
 

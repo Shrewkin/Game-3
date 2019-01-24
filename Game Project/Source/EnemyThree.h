@@ -33,18 +33,32 @@ namespace Behaviors
 	{
 	public:
 
+		//Constructor for the EnemyThree class
 		EnemyThree();
 
+		//Returns a copy of this component
 		Component* Clone() const;
 
+		//Handles collision between this and another object
+		//Params:
+		//	 object = the owner
+		//	 other = the object we collided with
 		friend void CollisionHandler(GameObject& object, GameObject& other);
 
+		//Initializes this component
 		void Initialize() override;
 
+		// Update this component
+		// Params:
+		//	 dt = Change in time (in seconds) since the last game loop
 		void Update(float dt) override;
 
 	private:
 
+		//Fires a set amount of bullets at the player with a set angle offset between them
+		//Params:
+		//	 spreadAngle = the angle offset between each bullet
+		//	 bulletCount = the amount of bullets we are firing
 		void Shoot(float spreadAngle, int bulletCount);
 
 		//Current shot type

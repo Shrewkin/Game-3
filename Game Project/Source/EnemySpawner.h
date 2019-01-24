@@ -24,23 +24,35 @@ namespace Behaviors
 	{
 	public:
 
+		//Constructor for EnemySpawner
 		EnemySpawner();
 
+		//Destructor for EnemySpawner (only needed to delete enemyMesh)
 		~EnemySpawner();
 
+		// Return a new copy of the component
 		Component* Clone() const;
 
+		// Initialize this component
 		void Initialize() override;
 
+		// Update this component
+		// Params:
+		//	 dt = Change in time (in seconds) since the last game loop
 		void Update(float dt) override;
 
+		// Returns the amount of enemies left to spawn this wave
 		unsigned getToSpawn();
 
+		// Returns the current wave
 		unsigned GetWave() const;
 
 	private:
 
+		//Sets all variables needed for the next wave
 		void SpawnWave();
+
+		//Spawns an enemy using the spawnChance vector
 		void SpawnEnemy();
 
 		//Spawn stuff

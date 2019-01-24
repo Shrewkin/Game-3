@@ -22,6 +22,7 @@
 #include <Space.h>
 #include "Health.h"
 #include "TimedDeath.h"
+#include "Random.h"
 
 namespace Behaviors
 {
@@ -179,9 +180,11 @@ namespace Behaviors
 		Transform* bulletTransform = static_cast<Transform*>(bullet->GetComponent("Transform"));
 		Physics* bulletPhysics = static_cast<Physics*>(bullet->GetComponent("Physics"));
 
+		float angle = atan2(dir.y, dir.x) + RandomRange(static_cast<float>(-M_PI / 10.0f), static_cast<float>(M_PI / 10.0f));
+
 		bulletTransform->SetTranslation(transform->GetTranslation() + dir * transform->GetScale().x / 2);
-		bulletTransform->SetRotation(atan2(dir.y, dir.x));
-		bulletPhysics->SetVelocity(dir * projectileSpeed);
+		bulletTransform->SetRotation(angle);
+		bulletPhysics->SetVelocity(Vector2D::FromAngleRadians(angle) * projectileSpeed);
 		
 		static_cast<TimedDeath*>(bullet->GetComponent("TimedDeath"))->SetEnemyBool(true);
 

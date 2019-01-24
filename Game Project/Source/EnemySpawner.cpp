@@ -61,6 +61,8 @@ namespace Behaviors
 		unsigned currCount = GetOwner()->GetSpace()->GetObjectManager().GetObjectCount("Enemy");
 		//std::cout << currCount << std::endl;
 
+
+		//If we aren't spawning stuff anymore we're on break
 		if (currCount == 0 && toSpawn == 0)
 		{
 			
@@ -71,6 +73,7 @@ namespace Behaviors
 				timer2 = waveTimer;
 			}
 		}
+		//Otherwise, we are spawning stuff
 		else if (toSpawn != 0)
 		{
 			timer1 -= dt;
@@ -96,13 +99,16 @@ namespace Behaviors
 	void EnemySpawner::SpawnWave()
 	{
 		++currWave;
+		//Calculate the amount of enemies to spawn this wave
 		toSpawn = baseSpawnCount + ((currWave - (currWave % waveCountModifier)) / waveCountModifier);
 		
+
+		//Based on the current wave, set the spawnChance vector
 		spawnChance.clear();
 
 		if (currWave < 3)
 		{
-			spawnChance.push_back(2);
+			spawnChance.push_back(1);
 		}
 		else if (currWave < 5)
 		{
@@ -152,7 +158,7 @@ namespace Behaviors
 		//Add a random offset
 		enemyPos += Vector2D(RandomRange(-randSpawnOffset, randSpawnOffset), RandomRange(-randSpawnOffset, randSpawnOffset));
 
-		//Generate a random num for enemy spawn (used when we have more enemy types)
+		//Select a random index in our spawnChance vector to spawn a random enemy
 		int randSpawn = spawnChance[RandomRange(0, static_cast<int>(spawnChance.size() - 1))];
 
 		if (randSpawn == 1)

@@ -98,13 +98,33 @@ namespace Archetypes
 	//	 A pointer to the newly constructed game object
 	GameObject* CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, GameObject* beam, Collider* map);
 	
+
+	//Creates and returns an Enemy Spawner game object that will handle spawning waves
 	GameObject* CreateEnemySpawner();
 
-	GameObject* CreateEnemyOneObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+	// Create an enemy one object
+	// Params:
+	//   mesh = The mesh to use for the sprite.
+	//	 spawnPos = the position this enemy will be spawned at
+	// Returns:
+	//   A pointer to the newly constructed game object.
+	GameObject* CreateEnemyOneObject(Mesh* mesh, Vector2D spawnPos);
 
-	GameObject* CreateEnemyTwoObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+	// Create an enemy two object
+	// Params:
+	//   mesh = The mesh to use for the sprite.
+	//	 spawnPos = the position this enemy will be spawned at
+	// Returns:
+	//   A pointer to the newly constructed game object.
+	GameObject* CreateEnemyTwoObject(Mesh * mesh, Vector2D spawnPos);
 
-	GameObject* CreateEnemyThreeObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+	// Create an enemy three object
+	// Params:
+	//   mesh = The mesh to use for the sprite.
+	//	 spawnPos = the position this enemy will be spawned at
+	// Returns:
+	//   A pointer to the newly constructed game object.
+	GameObject* CreateEnemyThreeObject(Mesh* mesh, Vector2D spawnPos);
 
 
 	// Create the laser beams object.
@@ -115,6 +135,12 @@ namespace Archetypes
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateLaserBeamObject(Mesh* mesh);
 
+	// Create Acid Pool archetype.
+	// Params:
+	//   mesh  = The mesh to use for the object's sprite.
+	//	 spriteSource = The sprite source to use for the object.
+	// Returns:
+	//	 A pointer to the newly constructed game object
 	GameObject* CreateAcidPoolArchetype(Mesh* mesh, SpriteSource* spriteSource);
 	
 }

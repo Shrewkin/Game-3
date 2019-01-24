@@ -62,8 +62,12 @@ namespace Behaviors
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
 
+		// Sets the "enemy" bool which controls wether the bullet hits the player
+		// Params:
+		//	 val = the value we are setting the enemy bool to
 		void SetEnemyBool(bool val);
 
+		// Returns the enemy bool
 		bool GetEnemyBool() const;
 
 		

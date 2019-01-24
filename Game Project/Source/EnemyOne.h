@@ -49,7 +49,9 @@ namespace Behaviors
 		//Initializes this component
 		void Initialize() override;
 
-		//Updates this component
+		// Update this component
+		// Params:
+		//	 dt = Change in time (in seconds) since the last game loop
 		void Update(float dt) override;
 
 		//Handles collision between the enemy and the tilemap
@@ -61,9 +63,11 @@ namespace Behaviors
 	private:
 
 		//Chases the player
+		//Params:
+		//	 speed = the speed at which we are to chase the player
 		void ChasePlayer(float speed);
 
-		//Runs away from the player
+		//Runs away from the player at a set speed
 		void RunFromPlayer();
 
 		//Fires a projectile at the player

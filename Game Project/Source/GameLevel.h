@@ -33,6 +33,7 @@ class Tilemap;
 namespace Behaviors
 {
 	class Health;
+	class EnemySpawner;
 }
 
 //------------------------------------------------------------------------------
@@ -101,6 +102,7 @@ namespace Levels
 
 		// Game Manager Data
 		Behaviors::Health* playerHealth;
+		Behaviors::EnemySpawner* enemySpawner;
 		int counter;
 		float timer;
 		float score;

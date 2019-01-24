@@ -36,6 +36,8 @@ namespace Behaviors
 
 		unsigned getToSpawn();
 
+		unsigned GetWave() const;
+
 	private:
 
 		void SpawnWave();

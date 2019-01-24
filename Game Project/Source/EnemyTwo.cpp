@@ -25,7 +25,7 @@
 namespace Behaviors
 {
 	EnemyTwo::EnemyTwo()
-		: Component("EnemyTwo"), maxSpeed(100.0f), acceleration(20.0f)
+		: Component("EnemyTwo"), maxSpeed(100.0f), acceleration(60.0f)
 	{
 	}
 
@@ -40,19 +40,19 @@ namespace Behaviors
 
 		if (tilemap.bottom)
 		{
-			physics->SetVelocity(Vector2D(0.0f, 35.0f));
+			physics->SetVelocity(Vector2D(0.0f, 60.0f));
 		}
 		else if (tilemap.top)
 		{
-			physics->SetVelocity(Vector2D(0.0f, -35.0f));
+			physics->SetVelocity(Vector2D(0.0f, -60.0f));
 		}
 		else if (tilemap.left)
 		{
-			physics->SetVelocity(Vector2D(35.0f, 0.0f));
+			physics->SetVelocity(Vector2D(60.0f, 0.0f));
 		}
 		else
 		{
-			physics->SetVelocity(Vector2D(-35.0f, 0.0f));
+			physics->SetVelocity(Vector2D(-60.0f, 0.0f));
 		}
 	}
 

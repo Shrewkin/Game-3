@@ -13,6 +13,7 @@
 #include "GameLevel.h"
 
 #include "Archetypes.h"
+#include "Health.h"
 #include "LoseLevel.h"
 #include "Space.h"
 #include "Tilemap.h"
@@ -30,6 +31,7 @@
 #include <Collider.h>
 #include <Graphics.h>
 #include <Engine.h>
+#include <System.h>
 
 namespace Levels
 {
@@ -46,10 +48,6 @@ namespace Levels
 		, rowsMap(3)
 		, timer(0)
 		, score(0)
-		// When weapons are implemented and we merge the branches, multiply a modifier by the amount currently being dealt
-		, currentDamage(50)
-		, damageDealt(0)
-		, enemiesAlive(0)
 	{
 	}
 
@@ -96,7 +94,7 @@ namespace Levels
 		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
 		GetSpace()->GetObjectManager().AddObject(*beam);
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
-			static_cast<Collider*>( map->GetComponent("Collider") )));
+			static_cast<Collider*>( map->GetComponent("Collider"))));
 	}
 
 	// Update GameLevel.
@@ -104,12 +102,12 @@ namespace Levels
 	//	 dt = Change in time (in seconds) since the last game loop.
 	void GameLevel::Update(float dt)
 	{
-		UNREFERENCED_PARAMETER(dt);
+		//UNREFERENCED_PARAMETER(dt);
 
 		// The following is made for gameplay testing purposes (can be considered cheat COdes)
 		if ( Input::GetInstance().CheckTriggered('1'))
 		{
-			GetSpace()->SetLevel(new Levels::LoseLevel() );
+			GetSpace()->SetLevel(new Levels::LoseLevel());
 		}
 
 		GameManager(dt);
@@ -136,9 +134,13 @@ namespace Levels
 	{
 		// Timer and damage stuff
 		timer += dt;
-		//
-		//enemiesAlive = GetSpace()->GetObjectManager().GetObjectCount("Enemy");
-		//
-		//std::cout << score << ' ' << enemiesAlive << std::endl;
+
+		
+		
+		
+		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
+
+		System::GetInstance().SetWindowTitle(windowTitle);
+	
 	}
 }

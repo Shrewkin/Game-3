@@ -101,6 +101,9 @@ namespace Archetypes
 	GameObject* CreateEnemySpawner();
 
 	GameObject* CreateEnemyOneObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+
+	GameObject* CreateEnemyTwoObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
+
 	GameObject* CreateEnemyThreeObject(Mesh* mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/);
 
 
@@ -111,6 +114,8 @@ namespace Archetypes
 	// Returns:
 	//	 A pointer to the newly constructed game object
 	GameObject* CreateLaserBeamObject(Mesh* mesh);
+
+	GameObject* CreateAcidPoolArchetype(Mesh* mesh, SpriteSource* spriteSource);
 	
 }
 

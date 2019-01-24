@@ -46,7 +46,7 @@ namespace Behaviors
 		// Constructor
 		// Params:
 		//   timeUntilDeath = Amount of time until the object self-destructs.
-		TimedDeath(float timeUntilDeath = 3.0f);
+		TimedDeath(float timeUntilDeath = 3.0f, bool mapCollision = true);
 
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
@@ -66,6 +66,8 @@ namespace Behaviors
 
 		bool GetEnemyBool() const;
 
+		
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
@@ -75,6 +77,7 @@ namespace Behaviors
 		float timeUntilDeath;
 
 		bool enemy;
+		bool connectMapCollision;
 	};
 }
 

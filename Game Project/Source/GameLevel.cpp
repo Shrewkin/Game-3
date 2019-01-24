@@ -64,6 +64,11 @@ namespace Levels
 
 		meshPlayer = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5, 0.5));
 
+		meshPool = CreateQuadMesh(Vector2D(1.0f, 1.0f), Vector2D(0.5f, 0.5f));
+		texturePool = Texture::CreateTextureFromFile("AcidPool.png");
+		spriteSourcePool = new SpriteSource(1, 1, texturePool);
+		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateAcidPoolArchetype(meshPool, spriteSourcePool));
+
 		Tilemap* tilemapBuffer = Tilemap::CreateTilemapFromFile("Assets/Levels/GameMap.txt");
 
 		if (tilemapBuffer != nullptr)
@@ -129,6 +134,10 @@ namespace Levels
 		delete meshMap;
 		delete textureMap;
 		delete spriteSourceMap;
+
+		delete meshPool;
+		delete texturePool;
+		delete spriteSourcePool;
 	}
 
 	// Updates Game Variables

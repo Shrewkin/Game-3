@@ -84,11 +84,17 @@ namespace Levels
 		unsigned columnsPlayer;
 		unsigned rowsPlayer;
 
+		//Acid Pool
+		Mesh* meshPool;
+		Texture* texturePool;
+		SpriteSource* spriteSourcePool;
+
 		// Tilemap
 		Tilemap* dataMap;
 		Texture* textureMap;
 		SpriteSource* spriteSourceMap;
 		Mesh* meshMap;
+
 
 		unsigned columnsMap;
 		unsigned rowsMap;

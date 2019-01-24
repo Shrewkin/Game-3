@@ -14,15 +14,18 @@
 #include "Health.h"
 #include "GameObject.h"
 #include "Sprite.h"
+#include "Space.h"
+#include "GameObjectManager.h"
+#include "Transform.h"
 #include "LoseLevel.h"
 #include <Space.h>
 
 namespace Behaviors
 {
 
-	Health::Health(int maxHealth, float invTime, float flashTime)
+	Health::Health(int maxHealth, float invTime, float flashTime, GameObject* toCreate)
 		: Component("Health"), maxHealth(maxHealth), currHealth(maxHealth), invincibilityTimer(invTime), flashTimer(flashTime),
-		  timer1(invTime), timer2(flashTime), invincible(false)
+		  timer1(invTime), timer2(flashTime), invincible(false), toCreate(toCreate)
 	{
 	}
 
@@ -74,25 +77,36 @@ namespace Behaviors
 			invincible = true;
 			if (currHealth <= 0)
 			{
+				if (toCreate != nullptr)
+				{
+					GameObject* object = new GameObject(*toCreate);
+					Vector2D translation = static_cast<Transform*>(GetOwner()->GetComponent("Transform"))->GetTranslation();
+					static_cast<Transform*>(object->GetComponent("Transform"))->SetTranslation(translation);
+					GetOwner()->GetSpace()->GetObjectManager().AddObject(*object);
+				}
 				//change to lose level on player death.
 				if (GetOwner()->GetName() == "Player")
 				{
 					GetOwner()->GetSpace()->SetLevel(new Levels::LoseLevel());
 				}
-
 				GetOwner()->Destroy();
 			}
 		}
 	}
 
-	int Health::GetHealth()
+	int Health::GetHealth() const
 	{
 		return currHealth;
 	}
 
-	int Health::GetMaxHealth()
+	int Health::GetMaxHealth() const
 	{
 		return maxHealth;
+	}
+
+	void Health::SetToCreate(GameObject* newToCreate)
+	{
+		toCreate = newToCreate;
 	}
 
 	void Health::CheckCap()

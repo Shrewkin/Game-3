@@ -95,16 +95,26 @@ namespace Behaviors
 		
 		spawnChance.clear();
 
-		if (currWave < 5)
+		if (currWave < 3)
 		{
 			spawnChance.push_back(1);
+		}
+		else if (currWave < 5)
+		{
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
 		}
 		else
 		{
 			spawnChance.push_back(1);
 			spawnChance.push_back(1);
 			spawnChance.push_back(1);
-			spawnChance.push_back(1);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
 			spawnChance.push_back(3);
 		}
 	}
@@ -143,6 +153,11 @@ namespace Behaviors
 		if (randSpawn == 1)
 		{
 			GameObject* enemy = Archetypes::CreateEnemyOneObject(enemy1Mesh, enemyPos);
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
+		}
+		else if (randSpawn == 2)
+		{
+			GameObject* enemy = Archetypes::CreateEnemyTwoObject(enemy1Mesh, enemyPos);
 			GetOwner()->GetSpace()->GetObjectManager().AddObject(*enemy);
 		}
 		else if(randSpawn == 3)

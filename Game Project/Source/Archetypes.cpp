@@ -42,6 +42,7 @@ file Archetypes.h.
 #include "PlayerShooting.h"
 #include "Health.h"
 #include "EnemyThree.h"
+#include "EnemyTwo.h"
 
 
 //==================================================================-
@@ -284,7 +285,7 @@ GameObject* Archetypes::CreatePlayer(Mesh* mesh, SpriteSource* spriteSource, Gam
 	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
 	Behaviors::PlayerMovement* playerMovement = new Behaviors::PlayerMovement();
 	Behaviors::PlayerShooting* playerShooting = new Behaviors::PlayerShooting(beam, map);
-	Behaviors::Health* health = new Behaviors::Health();
+	Behaviors::Health* health = new Behaviors::Health(5, 2.0f);
 
 	transform->SetScale(Vector2D(50.0f, 50.0f));
 	sprite->SetMesh(mesh);
@@ -353,6 +354,38 @@ GameObject* Archetypes::CreateEnemyOneObject(Mesh * mesh, Vector2D spawnPos/*, S
 	return enemyObject;
 }
 
+GameObject* Archetypes::CreateEnemyTwoObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/)
+{
+	//initilize all components
+	Transform* transform = new Transform(spawnPos.x, spawnPos.y);
+	transform->SetScale(Vector2D(75.0f, 75.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	//sprite->SetSpriteSource(spriteSource);
+	sprite->SetColor(Colors::Yellow);
+
+	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
+
+	Physics* physics = new Physics();
+
+	Behaviors::Health* health = new Behaviors::Health(15);
+
+	Behaviors::EnemyTwo* enemy = new Behaviors::EnemyTwo();
+
+	//create object add all the components
+	GameObject* enemyObject = new GameObject("Enemy");
+
+	enemyObject->AddComponent(transform);
+	enemyObject->AddComponent(sprite);
+	enemyObject->AddComponent(colliderRectangle);
+	enemyObject->AddComponent(physics);
+	enemyObject->AddComponent(health);
+	enemyObject->AddComponent(enemy);
+
+	return enemyObject;
+}
+
 GameObject* Archetypes::CreateEnemyThreeObject(Mesh * mesh, Vector2D spawnPos/*, SpriteSource * spriteSource*/)
 {
 	//initilize all components
@@ -362,7 +395,7 @@ GameObject* Archetypes::CreateEnemyThreeObject(Mesh * mesh, Vector2D spawnPos/*,
 	Sprite* sprite = new Sprite();
 	sprite->SetMesh(mesh);
 	//sprite->SetSpriteSource(spriteSource);
-	sprite->SetColor(Colors::Red);
+	sprite->SetColor(Colors::Violet);
 
 	ColliderRectangle* colliderRectangle = new ColliderRectangle(Vector2D(transform->GetScale().x * 0.5f, transform->GetScale().y * 0.5f));
 
@@ -408,6 +441,29 @@ GameObject* Archetypes::CreateLaserBeamObject(Mesh * mesh)
 	//GameObjectFactory::GetInstance().SaveObjectToFile(bullet);
 
 	return laser;
+}
+
+GameObject* Archetypes::CreateAcidPoolArchetype(Mesh* mesh, SpriteSource* spriteSource)
+{
+	GameObject* acidPool = new GameObject("AcidPool");
+
+	Transform* transform = new Transform(0.0f, 0.0f);
+	transform->SetScale(Vector2D(128.0f, 128.0f));
+
+	Sprite* sprite = new Sprite();
+	sprite->SetMesh(mesh);
+	sprite->SetSpriteSource(spriteSource);
+
+	ColliderCircle* collider = new ColliderCircle(64.0f);
+
+	Behaviors::TimedDeath* timedDeath = new Behaviors::TimedDeath(5.0f, false);
+
+	acidPool->AddComponent(transform);
+	acidPool->AddComponent(sprite);
+	acidPool->AddComponent(collider);
+	acidPool->AddComponent(timedDeath);
+
+	return acidPool;
 }
 
 /*

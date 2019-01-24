@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	EnemyOne.h
+// File Name:	EnemyOne.cpp
 // Author(s):	Bar Ben-zvi
 // Description: Enemy one attempts to stay at a specified distance from the player and fire at the player
 // Project:		Game Prototype 3

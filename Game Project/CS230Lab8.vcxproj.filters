@@ -49,6 +49,9 @@
     <ClCompile Include="Source\EnemyThree.cpp">
       <Filter>Game\Behaviors</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnemyTwo.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -82,6 +85,9 @@
       <Filter>Game\Levels</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyThree.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyTwo.h">
       <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>

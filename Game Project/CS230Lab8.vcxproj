@@ -108,6 +108,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\EnemyOne.cpp" />
     <ClCompile Include="Source\EnemySpawner.cpp" />
     <ClCompile Include="Source\EnemyThree.cpp" />
+    <ClCompile Include="Source\EnemyTwo.cpp" />
     <ClCompile Include="Source\GameLevel.cpp" />
     <ClCompile Include="Source\Health.cpp" />
     <ClCompile Include="Source\LoseLevel.cpp" />
@@ -125,6 +126,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\EnemyOne.h" />
     <ClInclude Include="Source\EnemySpawner.h" />
     <ClInclude Include="Source\EnemyThree.h" />
+    <ClInclude Include="Source\EnemyTwo.h" />
     <ClInclude Include="Source\GameLevel.h" />
     <ClInclude Include="Source\Health.h" />
     <ClInclude Include="Source\LoseLevel.h" />

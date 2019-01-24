@@ -150,7 +150,7 @@ namespace Levels
 
 		health = playerHealth->GetHealth();
 
-		score = enemySpawner->GetWave();
+		score = static_cast<float>( enemySpawner->GetWave() );
 
 		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
 

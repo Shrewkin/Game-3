@@ -93,7 +93,9 @@ namespace Levels
 
 		Graphics& graphics = Graphics::GetInstance();
 		graphics.SetBackgroundColor(Colors::Grey);
-		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreateEnemySpawner());
+		GameObject* spawner = Archetypes::CreateEnemySpawner();
+		enemySpawner = static_cast<Behaviors::EnemySpawner*>(spawner->GetComponent("EnemySpawner"));
+		GetSpace()->GetObjectManager().AddObject(*spawner);
 		GameObject* map = Archetypes::CreateTilemapObject(meshMap, spriteSourceMap, dataMap);
 		GetSpace()->GetObjectManager().AddObject(*map);
 		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
@@ -148,7 +150,7 @@ namespace Levels
 
 		health = playerHealth->GetHealth();
 
-		score = timer / 10.0f;
+		score = static_cast<float>( enemySpawner->GetWave() );
 
 		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
 

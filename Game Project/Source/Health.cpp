@@ -14,6 +14,8 @@
 #include "Health.h"
 #include "GameObject.h"
 #include "Sprite.h"
+#include "LoseLevel.h"
+#include <Space.h>
 
 namespace Behaviors
 {
@@ -72,6 +74,12 @@ namespace Behaviors
 			invincible = true;
 			if (currHealth <= 0)
 			{
+				//change to lose level on player death.
+				if (GetOwner()->GetName() == "Player")
+				{
+					GetOwner()->GetSpace()->SetLevel(new Levels::LoseLevel());
+				}
+
 				GetOwner()->Destroy();
 			}
 		}

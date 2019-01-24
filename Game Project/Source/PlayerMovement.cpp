@@ -42,7 +42,7 @@ namespace Behaviors
 	// Destructor
 	PlayerMovement::~PlayerMovement()
 	{
-		GetOwner()->GetSpace()->SetLevel( new Levels::LoseLevel() );
+	
 	}
 
 	// Clone a component and return a pointer to the cloned component.

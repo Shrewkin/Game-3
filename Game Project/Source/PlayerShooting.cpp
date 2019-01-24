@@ -41,6 +41,12 @@ namespace Behaviors
 	{
 	}
 
+	// Destructor
+	PlayerShooting::~PlayerShooting()
+	{
+		delete[] colliders;
+	}
+
 	// Clone a component and return a pointer to the cloned component.
 	// Returns:
 	//   A pointer to a dynamically allocated clone of the component.
@@ -144,13 +150,12 @@ namespace Behaviors
 			laserBeamSprite->SetAlpha(0);
 
 			//update cooldown with delta time	
-			overHeating -= dt;
+			if (overHeating >= 0)
+			{
+				overHeating -= dt;
+			}
+			
 		}		
-	}
-
-	void PlayerShooting::Shutdown()
-	{
-		delete colliders;
 	}
 
 	//------------------------------------------------------------------------------

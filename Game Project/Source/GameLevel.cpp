@@ -39,7 +39,7 @@ namespace Levels
 
 	// Creates an instance of GameLevel.
 	GameLevel::GameLevel()
-		: Level("Level2")
+		: Level("GameLevel")
 		, columnsPlayer(1)
 		, rowsPlayer(1)
 		, columnsMap(4)
@@ -56,7 +56,7 @@ namespace Levels
 	// Load the resources associated with GameLevel.
 	void GameLevel::Load()
 	{
-		std::cout << "Level2::Load" << std::endl;
+		std::cout << "GameLevel::Load" << std::endl;
 
 		meshBullet = CreateTriangleMesh(Colors::Red, Colors::Red, Colors::Red);
 		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateBulletArchetype(meshBullet));
@@ -86,7 +86,7 @@ namespace Levels
 	// Initialize the memory associated with GameLevel.
 	void GameLevel::Initialize()
 	{
-		std::cout << "Level2::Initialize" << std::endl;
+		std::cout << "GameLevel::Initialize" << std::endl;
 
 		Graphics& graphics = Graphics::GetInstance();
 		graphics.SetBackgroundColor(Colors::Grey);
@@ -118,7 +118,7 @@ namespace Levels
 	// Unload the resources associated with GameLevel.
 	void GameLevel::Unload()
 	{
-		std::cout << "Level2::Unload" << std::endl;
+		std::cout << "GameLevel::Unload" << std::endl;
 
 		delete meshPlayer;
 		delete texturePlayer;

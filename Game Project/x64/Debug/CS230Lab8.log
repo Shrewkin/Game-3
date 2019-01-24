@@ -1,0 +1,22 @@
+﻿  stdafx.cpp
+  Archetypes.cpp
+  EnemyOne.cpp
+  EnemySpawner.cpp
+  EnemyThree.cpp
+  EnemyTwo.cpp
+  GameLevel.cpp
+  Health.cpp
+  LoseLevel.cpp
+  Main.cpp
+  PlayerMovement.cpp
+  PlayerShooting.cpp
+  TimedDeath.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  CS230Lab8.vcxproj -> D:\Projects\Game-3\Game Project\\x64\Debug\BetaFramework.exe
+  glfw\lib\x64\glfw3.dll
+  1 File(s) copied
+  fmod\lib\fmodL64.dll
+  1 File(s) copied
+  fmod\lib\fmodstudioL64.dll
+  1 File(s) copied

@@ -1,0 +1,23 @@
+﻿  stdafx.cpp
+  Archetypes.cpp
+  EnemyOne.cpp
+  EnemySpawner.cpp
+  EnemyThree.cpp
+  EnemyTwo.cpp
+  GameLevel.cpp
+  Health.cpp
+  LoseLevel.cpp
+  Main.cpp
+  PlayerMovement.cpp
+  PlayerShooting.cpp
+  TimedDeath.cpp
+  Generating code
+  All 569 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  CS230Lab8.vcxproj -> D:\Projects\Game-3\Game Project\\x64\Release\BetaFramework.exe
+  glfw\lib\x64\glfw3.dll
+  1 File(s) copied
+  fmod\lib\fmod64.dll
+  1 File(s) copied
+  fmod\lib\fmodstudio64.dll
+  1 File(s) copied

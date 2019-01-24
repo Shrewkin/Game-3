@@ -1,0 +1,26 @@
+﻿  stdafx.cpp
+  Animation.cpp
+  Collider.cpp
+  ColliderCircle.cpp
+  ColliderPoint.cpp
+  ColliderRectangle.cpp
+  ColliderTilemap.cpp
+  Component.cpp
+  GameObject.cpp
+  GameObjectManager.cpp
+  Intersection2D.cpp
+  level.cpp
+  Matrix2Dstudent.cpp
+  MeshHelper.cpp
+  Physics.cpp
+  SoundManager.cpp
+  Space.cpp
+  Sprite.cpp
+  SpriteSource.cpp
+  SpriteTilemap.cpp
+  Tilemap.cpp
+  Compiling...
+  Transform.cpp
+fmod64_vc.lib(fmod64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+fmodstudio64_vc.lib(fmodstudio64.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in BetaLow_x64.lib(RPCRT4.dll); second definition ignored
+  HighLevelAPI.vcxproj -> D:\Projects\Game-3\Game Project\HighLevelAPI\\lib\BetaHigh_x64.lib

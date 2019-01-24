@@ -88,6 +88,11 @@ namespace Behaviors
 		return toSpawn;
 	}
 
+	unsigned EnemySpawner::GetWave() const
+	{
+		return currWave;
+	}
+
 	void EnemySpawner::SpawnWave()
 	{
 		++currWave;
@@ -97,7 +102,7 @@ namespace Behaviors
 
 		if (currWave < 3)
 		{
-			spawnChance.push_back(1);
+			spawnChance.push_back(2);
 		}
 		else if (currWave < 5)
 		{

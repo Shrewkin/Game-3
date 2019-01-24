@@ -30,6 +30,11 @@ class SpriteSource;
 class GameObject;
 class Tilemap;
 
+namespace Behaviors
+{
+	class Health;
+}
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -89,6 +94,7 @@ namespace Levels
 		unsigned rowsMap;
 
 		// Game Manager Data
+		Behaviors::Health* playerHealth;
 		int counter;
 		float timer;
 		float score;

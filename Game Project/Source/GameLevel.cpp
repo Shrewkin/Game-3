@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //
 // File Name:	GameLevel.cpp
-// Author(s):	Peter Strizhev
+// Author(s):	Peter Strizhev, Jakob McFarland
 // Project:		BetaFramework
 // Course:		WANIC VGP2 2018-2019
 //
@@ -93,8 +93,10 @@ namespace Levels
 		GetSpace()->GetObjectManager().AddObject(*map);
 		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
 		GetSpace()->GetObjectManager().AddObject(*beam);
-		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
-			static_cast<Collider*>( map->GetComponent("Collider"))));
+		GameObject* player = Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
+			static_cast<Collider*>(map->GetComponent("Collider")));
+		playerHealth = static_cast<Behaviors::Health*>(player->GetComponent("Health"));
+		GetSpace()->GetObjectManager().AddObject(*player);
 	}
 
 	// Update GameLevel.
@@ -135,12 +137,12 @@ namespace Levels
 		// Timer and damage stuff
 		timer += dt;
 
-		
-		
-		
+		health = playerHealth->GetHealth();
+
+		score = timer / 10.0f;
+
 		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
 
 		System::GetInstance().SetWindowTitle(windowTitle);
-	
 	}
 }

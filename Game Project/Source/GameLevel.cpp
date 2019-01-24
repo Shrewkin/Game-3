@@ -13,6 +13,7 @@
 #include "GameLevel.h"
 
 #include "Archetypes.h"
+#include "Health.h"
 #include "LoseLevel.h"
 #include "Space.h"
 #include "Tilemap.h"
@@ -30,6 +31,7 @@
 #include <Collider.h>
 #include <Graphics.h>
 #include <Engine.h>
+#include <System.h>
 
 namespace Levels
 {
@@ -39,24 +41,20 @@ namespace Levels
 
 	// Creates an instance of GameLevel.
 	GameLevel::GameLevel()
-		: Level("Level2")
+		: Level("GameLevel")
 		, columnsPlayer(1)
 		, rowsPlayer(1)
 		, columnsMap(4)
 		, rowsMap(3)
 		, timer(0)
 		, score(0)
-		// When weapons are implemented and we merge the branches, multiply a modifier by the amount currently being dealt
-		, currentDamage(50)
-		, damageDealt(0)
-		, enemiesAlive(0)
 	{
 	}
 
 	// Load the resources associated with GameLevel.
 	void GameLevel::Load()
 	{
-		std::cout << "Level2::Load" << std::endl;
+		std::cout << "GameLevel::Load" << std::endl;
 
 		meshBullet = CreateTriangleMesh(Colors::Red, Colors::Red, Colors::Red);
 		GetSpace()->GetObjectManager().AddArchetype(*Archetypes::CreateBulletArchetype(meshBullet));
@@ -91,7 +89,7 @@ namespace Levels
 	// Initialize the memory associated with GameLevel.
 	void GameLevel::Initialize()
 	{
-		std::cout << "Level2::Initialize" << std::endl;
+		std::cout << "GameLevel::Initialize" << std::endl;
 
 		Graphics& graphics = Graphics::GetInstance();
 		graphics.SetBackgroundColor(Colors::Grey);
@@ -101,9 +99,7 @@ namespace Levels
 		GameObject* beam = Archetypes::CreateLaserBeamObject(meshPlayer);
 		GetSpace()->GetObjectManager().AddObject(*beam);
 		GetSpace()->GetObjectManager().AddObject(*Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
-			static_cast<Collider*>( map->GetComponent("Collider") )));
-
-		
+			static_cast<Collider*>( map->GetComponent("Collider"))));
 	}
 
 	// Update GameLevel.
@@ -111,12 +107,12 @@ namespace Levels
 	//	 dt = Change in time (in seconds) since the last game loop.
 	void GameLevel::Update(float dt)
 	{
-		UNREFERENCED_PARAMETER(dt);
+		//UNREFERENCED_PARAMETER(dt);
 
 		// The following is made for gameplay testing purposes (can be considered cheat COdes)
 		if ( Input::GetInstance().CheckTriggered('1'))
 		{
-			GetSpace()->SetLevel(new Levels::LoseLevel() );
+			GetSpace()->SetLevel(new Levels::LoseLevel());
 		}
 
 		GameManager(dt);
@@ -125,7 +121,7 @@ namespace Levels
 	// Unload the resources associated with GameLevel.
 	void GameLevel::Unload()
 	{
-		std::cout << "Level2::Unload" << std::endl;
+		std::cout << "GameLevel::Unload" << std::endl;
 
 		delete meshPlayer;
 		delete texturePlayer;
@@ -147,9 +143,13 @@ namespace Levels
 	{
 		// Timer and damage stuff
 		timer += dt;
-		//
-		//enemiesAlive = GetSpace()->GetObjectManager().GetObjectCount("Enemy");
-		//
-		//std::cout << score << ' ' << enemiesAlive << std::endl;
+
+		
+		
+		
+		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
+
+		System::GetInstance().SetWindowTitle(windowTitle);
+	
 	}
 }

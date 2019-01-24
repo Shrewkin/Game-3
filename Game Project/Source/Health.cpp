@@ -17,6 +17,8 @@
 #include "Space.h"
 #include "GameObjectManager.h"
 #include "Transform.h"
+#include "LoseLevel.h"
+#include <Space.h>
 
 namespace Behaviors
 {
@@ -81,6 +83,11 @@ namespace Behaviors
 					Vector2D translation = static_cast<Transform*>(GetOwner()->GetComponent("Transform"))->GetTranslation();
 					static_cast<Transform*>(object->GetComponent("Transform"))->SetTranslation(translation);
 					GetOwner()->GetSpace()->GetObjectManager().AddObject(*object);
+				}
+				//change to lose level on player death.
+				if (GetOwner()->GetName() == "Player")
+				{
+					GetOwner()->GetSpace()->SetLevel(new Levels::LoseLevel());
 				}
 				GetOwner()->Destroy();
 			}

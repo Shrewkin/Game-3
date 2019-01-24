@@ -50,6 +50,9 @@ namespace Behaviors
 		PlayerShooting(GameObject* laserBeamObj_, Collider* worldMap_ = nullptr, float maxheat_ = 5.0f,
 			int beamLength_ = 41, float beamWidth_ = 25.0f);
 
+		// Destructor
+		~PlayerShooting();
+
 		// Clone a component and return a pointer to the cloned component.
 		// Returns:
 		//   A pointer to a dynamically allocated clone of the component.
@@ -62,8 +65,6 @@ namespace Behaviors
 		// Params:
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
-
-		void Shutdown() override;
 
 	private:
 		//------------------------------------------------------------------------------

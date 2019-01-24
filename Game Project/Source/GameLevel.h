@@ -95,13 +95,14 @@ namespace Levels
 		unsigned rowsMap;
 
 		// Game Manager Data
+		int counter;
 		float timer;
-		int score;
-		// Amount of damage that the weapon currently deals to each enemy it comes in contact with.
-		// Current Damage will change with the more upgrades that the player has.
-		float currentDamage;
-		int damageDealt;
-		int enemiesAlive;
+		float score;
+		int health;
+
+		// Title
+		static const unsigned titleStringLength = 100;
+		char windowTitle[titleStringLength];
 	};
 }
 

@@ -118,6 +118,20 @@ namespace Behaviors
 			spawnChance.push_back(2);
 			spawnChance.push_back(2);
 		}
+		else if (currWave < 10)
+		{
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(1);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
+			spawnChance.push_back(3);
+		}
+		else if(currWave == 10)
+		{
+			spawnChance.push_back(2);
+		}
 		else
 		{
 			spawnChance.push_back(1);
@@ -126,6 +140,9 @@ namespace Behaviors
 			spawnChance.push_back(2);
 			spawnChance.push_back(2);
 			spawnChance.push_back(2);
+			spawnChance.push_back(2);
+			spawnChance.push_back(2);
+			spawnChance.push_back(3);
 			spawnChance.push_back(3);
 		}
 	}

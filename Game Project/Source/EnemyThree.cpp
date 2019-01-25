@@ -131,6 +131,7 @@ namespace Behaviors
 			Vector2D dir = Vector2D::FromAngleRadians(angleToPlayer + currOffset);
 
 			static_cast<Transform*>(bullet->GetComponent("Transform"))->SetTranslation(transform->GetTranslation());
+			static_cast<Transform*>(bullet->GetComponent("Transform"))->SetRotation(angleToPlayer + currOffset);
 			static_cast<Physics*>(bullet->GetComponent("Physics"))->SetVelocity(dir * projectileSpeed);
 			static_cast<TimedDeath*>(bullet->GetComponent("TimedDeath"))->SetEnemyBool(true);
 

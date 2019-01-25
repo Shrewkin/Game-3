@@ -52,7 +52,7 @@ GameObject* Archetypes::CreateBulletArchetype(Mesh* mesh)
 {
 	//initilize all components
 	Transform* transform = new Transform(0.0f, 0.0f);
-	transform->SetScale(Vector2D(7.0f, 7.0f));
+	transform->SetScale(Vector2D(14.0f, 14.0f));
 
 	Sprite* sprite = new Sprite();
 	sprite->SetMesh(mesh);

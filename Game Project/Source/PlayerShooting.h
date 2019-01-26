@@ -47,7 +47,7 @@ namespace Behaviors
 		//------------------------------------------------------------------------------
 
 		// Constructor
-		PlayerShooting(GameObject* laserBeamObj_, Collider* worldMap_ = nullptr, float maxheat_ = 5.0f,
+		PlayerShooting(GameObject* laserBeamObj_, Collider* worldMap_ = nullptr, float maxheat_ = 7.5f,
 			int beamLength_ = 41, float beamWidth_ = 25.0f);
 
 		// Destructor
@@ -65,6 +65,14 @@ namespace Behaviors
 		// Params:
 		//   dt = The (fixed) change in time since the last step.
 		void Update(float dt) override;
+
+		void ScaleMaxHeat(float scalar);
+
+		void IncreaseDamage(int increase);
+
+		int GetDamage() const;
+
+		float GetMaxHeat() const;
 
 	private:
 		//------------------------------------------------------------------------------
@@ -90,9 +98,12 @@ namespace Behaviors
 		float maxHeat;
 		int rayCastLength;
 		float beamWidth;
+		float cantShootTimer;
+		int damage;
 
 		bool beamOn = false;
 		bool cutoff = false;
+		bool cantShoot = false;
 
 		//ray
 		GameObject** colliders;

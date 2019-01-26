@@ -21,6 +21,7 @@
 #include "GameObject.h"
 #include "Space.h"
 #include "GameObjectManager.h"
+#include "PlayerShooting.h"
 
 namespace Behaviors
 {
@@ -60,8 +61,11 @@ namespace Behaviors
 	{
 		if (other.GetName() == "RayPoint")
 		{
+			PlayerShooting* player = static_cast<PlayerShooting*>(
+				owner.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent("PlayerShooting"));
+
 			Health* health = static_cast<Health*>(owner.GetComponent("Health"));
-			health->Subtract(1);
+			health->Subtract(player->GetDamage());
 		}
 	}
 

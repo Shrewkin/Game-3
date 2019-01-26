@@ -32,6 +32,7 @@
 #include <Graphics.h>
 #include <Engine.h>
 #include <System.h>
+#include "PlayerShooting.h"
 
 namespace Levels
 {
@@ -103,6 +104,7 @@ namespace Levels
 		GameObject* player = Archetypes::CreatePlayer(meshPlayer, spriteSourcePlayer, beam,
 			static_cast<Collider*>(map->GetComponent("Collider")));
 		playerHealth = static_cast<Behaviors::Health*>(player->GetComponent("Health"));
+		playerShooting = static_cast<Behaviors::PlayerShooting*>(player->GetComponent("PlayerShooting"));
 		GetSpace()->GetObjectManager().AddObject(*player);
 	}
 
@@ -152,7 +154,11 @@ namespace Levels
 
 		score = static_cast<float>( enemySpawner->GetWave() );
 
-		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d", timer, score, health);
+		float maxHeat = playerShooting->GetMaxHeat();
+
+		int damage = playerShooting->GetDamage();
+
+		sprintf_s(windowTitle, titleStringLength, "Time: %.2f :: Score: %.1f :: Health: %d :: Max Heat %.1f :: Laser Damage %d", timer, score, health, maxHeat, damage);
 
 		System::GetInstance().SetWindowTitle(windowTitle);
 	}

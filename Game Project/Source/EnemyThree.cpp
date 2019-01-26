@@ -21,6 +21,7 @@
 #include <Random.h>
 #include "Health.h"
 #include "Collider.h"
+#include "PlayerShooting.h"
 
 namespace Behaviors
 {
@@ -39,7 +40,11 @@ namespace Behaviors
 	{
 		if(other.GetName() == "RayPoint")
 		{
-			static_cast<Health*>(owner.GetComponent("Health"))->Subtract(1);
+			PlayerShooting* player = static_cast<PlayerShooting*>(
+				owner.GetSpace()->GetObjectManager().GetObjectByName("Player")->GetComponent("PlayerShooting"));
+
+			Health* health = static_cast<Health*>(owner.GetComponent("Health"));
+			health->Subtract(player->GetDamage());
 		}
 
 		if (other.GetName() == "Bullet" && !static_cast<TimedDeath*>(other.GetComponent("TimedDeath"))->GetEnemyBool())

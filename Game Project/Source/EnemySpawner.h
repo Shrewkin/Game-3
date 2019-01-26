@@ -80,5 +80,7 @@ namespace Behaviors
 		Mesh* enemy1Mesh;
 
 
+		bool upgraded;
+
 	};
 }

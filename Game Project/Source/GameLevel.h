@@ -34,6 +34,7 @@ namespace Behaviors
 {
 	class Health;
 	class EnemySpawner;
+	class PlayerShooting;
 }
 
 //------------------------------------------------------------------------------
@@ -103,6 +104,7 @@ namespace Levels
 		// Game Manager Data
 		Behaviors::Health* playerHealth;
 		Behaviors::EnemySpawner* enemySpawner;
+		Behaviors::PlayerShooting* playerShooting;
 		int counter;
 		float timer;
 		float score;

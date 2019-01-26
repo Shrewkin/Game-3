@@ -22,6 +22,8 @@
 #include <MeshHelper.h>
 #include <MeshFactory.h>
 #include <Mesh.h>
+#include "Health.h"
+#include "PlayerShooting.h"
 
 namespace Behaviors
 {
@@ -29,7 +31,7 @@ namespace Behaviors
 		: Component("EnemySpawner")
 		, spawnPos(300.0f, 200.0f)
 		, baseSpawnCount(2)
-		, randSpawnOffset(25.0f)
+		, randSpawnOffset(15.0f)
 		, spawnTimer(0.5f)
 		, spawnChance(1)
 		, toSpawn(0)
@@ -65,7 +67,29 @@ namespace Behaviors
 		//If we aren't spawning stuff anymore we're on break
 		if (currCount == 0 && toSpawn == 0)
 		{
-			
+			if (!upgraded)
+			{
+				if ((currWave + 1) % 10 == 0)
+				{
+					GameObject* player = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Player");
+
+					Health* playerHealth = static_cast<Health*>(player->GetComponent("Health"));
+
+					playerHealth->Add(playerHealth->GetMaxHealth() - playerHealth->GetHealth());
+
+					if (currWave == 9)
+					{
+						static_cast<PlayerShooting*>(player->GetComponent("PlayerShooting"))->IncreaseDamage(1);
+					}
+					else if (currWave == 19)
+					{
+						static_cast<PlayerShooting*>(player->GetComponent("PlayerShooting"))->ScaleMaxHeat(2.0f);
+					}
+				}
+
+				upgraded = true;
+			}
+
 			timer2 -= dt;
 			if (timer2 <= 0.0f)
 			{
@@ -102,11 +126,36 @@ namespace Behaviors
 		//Calculate the amount of enemies to spawn this wave
 		toSpawn = baseSpawnCount + ((currWave - (currWave % waveCountModifier)) / waveCountModifier);
 		
+		upgraded = false;
 
 		//Based on the current wave, set the spawnChance vector
 		spawnChance.clear();
 
-		if (currWave < 3)
+		if (currWave % 10 == 0)
+		{
+
+			if (currWave == 10)
+			{
+				spawnChance.push_back(2);
+			}
+			else if (currWave == 20)
+			{
+				spawnChance.push_back(1);
+			}
+			else
+			{
+				spawnChance.push_back(2);
+				spawnChance.push_back(2);
+				spawnChance.push_back(2);
+				spawnChance.push_back(2);
+				spawnChance.push_back(3);
+			}
+		}
+		else if (currWave == 15)
+		{
+			spawnChance.push_back(3);
+		}
+		else if (currWave < 3)
 		{
 			spawnChance.push_back(1);
 		}
@@ -127,10 +176,6 @@ namespace Behaviors
 			spawnChance.push_back(2);
 			spawnChance.push_back(2);
 			spawnChance.push_back(3);
-		}
-		else if(currWave == 10)
-		{
-			spawnChance.push_back(2);
 		}
 		else
 		{

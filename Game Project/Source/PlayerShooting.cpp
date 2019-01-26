@@ -37,7 +37,7 @@ namespace Behaviors
 	PlayerShooting::PlayerShooting(GameObject* laserBeamObj_, Collider* worldMap_, float maxHeat_,
 		int beamLength_, float beamWidth_)
 		: Component("PlayerShooting"), laserBeamObject(laserBeamObj_), overHeating(0.0f),
-		maxHeat(maxHeat_), rayCastLength(beamLength_), beamWidth(beamWidth_), worldMap(worldMap_)
+		maxHeat(maxHeat_), rayCastLength(beamLength_), beamWidth(beamWidth_), cantShootTimer(0.5f), damage(1), worldMap(worldMap_)
 	{
 	}
 
@@ -94,7 +94,17 @@ namespace Behaviors
 		laserBeamSprite->SetColor(Interpolate(coolColor, hotColor, overHeating / maxHeat));
 		static_cast<Sprite*>( GetOwner()->GetComponent("Sprite") )->SetColor(Interpolate(coolColor, hotColor, overHeating / maxHeat));
 
-		if (Input::GetInstance().CheckHeld(VK_LBUTTON))
+		if (cantShoot)
+		{
+			cantShootTimer -= dt;
+			if (cantShootTimer <= 0.0f)
+			{
+				cantShootTimer = 0.5f;
+				cantShoot = false;
+			}
+		}
+
+		if (Input::GetInstance().CheckHeld(VK_LBUTTON) && !cantShoot)
 		{
 			//check heat
 			if (overHeating <= maxHeat)
@@ -138,6 +148,7 @@ namespace Behaviors
 			if (beamOn)
 			{
 				beamOn = false;
+				cantShoot = true;
 
 				//ray cast collider off
 				for (int i = 0; i < rayCastLength; i++)
@@ -156,6 +167,26 @@ namespace Behaviors
 			}
 			
 		}		
+	}
+
+	void PlayerShooting::ScaleMaxHeat(float scalar)
+	{
+		maxHeat *= scalar;
+	}
+
+	void PlayerShooting::IncreaseDamage(int increase)
+	{
+		damage += increase;
+	}
+
+	int PlayerShooting::GetDamage() const
+	{
+		return damage;
+	}
+
+	float PlayerShooting::GetMaxHeat() const
+	{
+		return maxHeat;
 	}
 
 	//------------------------------------------------------------------------------
